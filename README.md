@@ -1,2 +1,0 @@
-# synr.github.io
-test
