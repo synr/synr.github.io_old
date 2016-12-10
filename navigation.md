@@ -32,7 +32,7 @@
   - [新創需要付費的 Dropbox（不能用了）](https://dl.dropboxusercontent.com/u/277393262/wiki/index.html)
   ----
   - #Markdown
-  - [常見的 Markdown 寫法介紹](#!mdwiki/markdown.md "待補")
+  - [常見的 Markdown 寫法介紹](#!mdwiki/mdwiki.markdown.md "待補")
 
 [🏥  反勒索病毒推廣！]()
 
