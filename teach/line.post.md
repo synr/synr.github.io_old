@@ -273,7 +273,7 @@ Note：
 
 ##我也來裝！你看！
 
-- 忍者 BLOG：[http:\/\/landerso.anime-voice.com](http://landerso.anime-voice.com)
+- 忍者 BLOG：[http://landerso.anime-voice.com](http://landerso.anime-voice.com)
 
 ###我直接把上面的那兩段在下面貼上，就變這樣。
 #####~~好啦，我有偷偷拿掉 autofocus，因為我這頁太長，寫那個會自動跳到後半XD~~
