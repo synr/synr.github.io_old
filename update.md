@@ -4,6 +4,14 @@
 這個系統只有一個 ``*.html`` 檔案，應該不會搞錯吧XD！
 會寫成 ``*.html``，只是單純有可能每個人命名不一樣。最多的可能是叫做 ``index.html`` 。
 
+## \[2016.12.12\] 分享到 LINE 的按鈕更新成電腦也可以使用
+
+- 而且這拉到哪個瀏覽器，都可以當成一個 Bookmarklet 書籤按鈕工具。
+~~~
+<a id="line" href="javascript:if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){window.open('http://line.me/R/msg/text/?' + encodeURIComponent( document.title + '\n' + location.href + '\n\n' + document.getSelection()));}else{window.open('https://lineit.line.me/share/ui?url=' + encodeURIComponent(location.href),'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=500,top=' + ((screen.height-600)/2-50) + ',left=' +(screen.width-500)/2);}">分享到 <img src="line.png" /> Line</a>
+~~~
+- 手機跟電腦走的路不一樣。
+
 ## \[2016.12.11\] 修正 燈箱開啟 YouTube 問題
 
 - 這問題是 ``https://www.youtube.com/watch?v=ID`` 或 ``https://youtu.be/ID`` 是瀏覽網址。

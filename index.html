@@ -995,7 +995,10 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
             md_file_show('config.json','md_file_config');
             //2016.10.20+
             if(!is_mobile()){
-                $(document.getElementById('line')).hide();
+                //2016.12.12 更新電腦版也可以轉發
+                //$(document.getElementById('line')).hide();
+            }else{
+                //$(document.getElementById('line')).show();
             }
             if(/http+:\/\/landerso.at-ninja.jp\//.test(document.location.href)){
                 $(document.getElementById('close_ni')).show();
@@ -1086,7 +1089,7 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
                         break;
                     case 'darkly':
                         set_theme_color('#375a7f');
-                        changebackcolor('https://coolors.co/222222-000533-01143a-17002b-222222');
+                        //changebackcolor('https://coolors.co/222222-000533-01143a-17002b-222222'); //暫停 2016.12.12
                         break;
                     case 'lumen':
                         set_theme_color('#f8f8f8');
@@ -2200,6 +2203,11 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
                     break;
                   case 'Mozilla/5.0 (Linux; Android 5.1.1; C6602 Build/10.7.A.0.222; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.0.2840.85 Mobile Safari/537.36 Line/6.9.1/IAB':
                     uname = 'ㄅㄅ';
+                    alert('感謝ㄅㄅ 今天首次透過 LINE 的瀏覽器協助測試（不');
+                    break;
+                  case 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36 Kinza/3.5.0':
+                    uname = 'ㄅㄅ';
+                    alert('感謝ㄅㄅ 今天首次用電腦協助測試（不');
                     break;
               }
               localStorage['welcome_conut'] = 1;

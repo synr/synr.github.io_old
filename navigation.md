@@ -160,7 +160,7 @@
   - <a href="javascript: void( window.open('https://mail.google.com/mail/?view=cm&fs=1&body='+ encodeURIComponent('- \[' + document.title) + '\]\(' +encodeURIComponent(location.href) + '\)' + encodeURIComponent('\n\n'+document.getSelection()) + '&su=' + encodeURIComponent(document.title) +  '&ui=2' ) );">📧 用 <img src="gmail.png" /> Gmail 寄信</a>
   ----
   - #↪ Share
-    - <a id="line" href="javascript: if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){void(window.open('http://line.me/R/msg/text/?' + encodeURIComponent( document.title + '\n' + location.href + '\n\n' + document.getSelection())));}">分享到 <img src="line.png" /> Line</a>
+  - <a id="line" href="javascript:if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){window.open('http://line.me/R/msg/text/?' + encodeURIComponent( document.title + '\n' + location.href + '\n\n' + document.getSelection()));}else{window.open('https://lineit.line.me/share/ui?url=' + encodeURIComponent(location.href),'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=500,top=' + ((screen.height-600)/2-50) + ',left=' +(screen.width-500)/2);}">分享到 <img src="line.png" /> Line</a>
   - <a href="javascript: if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){void(window.open('http://www.plurk.com/m/?qualifier=shares&content=' + encodeURIComponent( '\[' + document.title + '\]\(' + location.href + '\)\n' + document.getSelection())));}else{void(window.open('http://www.plurk.com/?qualifier=shares&status=' + encodeURIComponent( '\[' + document.title + '\]\(' + location.href + '\)\n' + document.getSelection())));}">分享到 <img src="plurk.jpg" /> Plurk</a>
   - <a href="javascript: void(window.open('http://www.facebook.com/sharer.php?u='.concat(encodeURIComponent(location.href)) .concat('&t=') .concat(encodeURIComponent(document.title))));">分享到 <img src="facebook.png" /> Facebook</a>
   - <a href="javascript: void(window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.href) + '&text=' + encodeURIComponent(document.title +'\n' + document.getSelection())));">分享到 <img src="twitter.png" /> Twitter</a>
@@ -185,9 +185,10 @@
   - <a href="javascript:fancybox_openurl('https://line.me/R/ti/p/%40pyv6283b');" alt="加入好友"><img src="line.png" /> 動畫瘋 LINE 機器人（站長試寫）</a>
   - [📺 操作示範效果](https://drive.google.com/file/d/0B3rgktr7zpP9c3BXR2c1WC1RdTQ/preview "這是基本版純文字訊息，據官方文件所示也支援傳送圖片、聲音、影像、檔案。但那需要另外研究怎麼寫。")
   
-[🔃  2016.12.11 更新]()
+[🔃  2016.12.12 更新]()
 
   - #更新項目
+  - [🆕 分享到 LINE 的按鈕更新成電腦也可以使用](#!update.md#[2016.12.12]_分享到_LINE_的按鈕更新成電腦也可以使用 "2016.12.12")
   - [🆕 修正 燈箱開啟 YouTube 問題](#!update.md#[2016.12.11]_修正_燈箱開啟_YouTube_問題 "2016.12.11")
   - [🆕 增加 Bootstrap 選單上的特效](#!update.md#[2016.12.09]_增加_Bootstrap_選單上的特效 "2016.12.09")
   - [🆕 基於 JavaScript 的 Error 403 封印完成](#!update.md#[2016.12.05]_基於_JavaScript_的_Error_403_封印完成 "2016.12.05")
@@ -215,6 +216,10 @@
   - [增加 OneNote、Flipboard，修正噗浪、Gmail 手機BUG。](#!update.md# "2016.10.20 完成待補寫")
   - [增加「語言/漢字轉換」：可不換頁轉換漢字外觀](#!update.md# "2016.10.19 完成待補寫")
   - [\[內/外部都調整\]完成「Trello 格式化儲存卡片功能」並新增儲存分享按鈕](#!update.md# "2016.10.18 完成待補寫")
+  - <a id='close_ni' href="javascript:$(document.getElementsByClassName('tdftad')).hide();$(document.getElementById('ninja')).hide();$(document.getElementById('close_ni')).hide();document.getElementById('justfont\-badge').id='bye';$(document.getElementById('bye')).hide();$(document.getElementById('justfont\-badge')).hide();">沙忍</a>
+
+
+<!-- 
   - [\[外部調整\] 加入外的「fancybox」燈箱](#!update.md#[2016.08.08]_加入外的「fancybox」燈箱)
   - [更新 MDwiki 重點架構檔案 頁面](#!update.md#[2016.08.05]_更新_MDwiki_重點架構檔案)
   - [新增 md 檔案竟然也能直接使用 HTML 標籤！？頁面](#!update.md#[2016.08.05]_增加_md_檔案竟然也能直接使用_HTML_標籤！？頁面)
@@ -223,7 +228,8 @@
   - [\[外部調整\] 增加 CSS 圖片自動縮放控制](#!update.md#[2016.08.03]_透過_CSS_增加對圖片自動縮放控制)
   - [\[外部調整\] 解決超連結不會另開新視窗的問題](#!update.md#[2016.08.03]_解決超連結不會另開新視窗的問題)
   - [\[外部調整\] 解決 Google Drive 空間網址超亂會連錯頁問題](#!update.md#[2016.08.03]_解決超連結不會另開新視窗的問題)
-  - <a id='close_ni' href="javascript:$(document.getElementsByClassName('tdftad')).hide();$(document.getElementById('ninja')).hide();$(document.getElementById('close_ni')).hide();document.getElementById('justfont\-badge').id='bye';$(document.getElementById('bye')).hide();$(document.getElementById('justfont\-badge')).hide();">沙忍</a>
+-->
+
 
 
 <!-- [[img(https://xa.shinobi.jp/bin/ll?181939900)]][https://xa.shinobi.jp/bin/gg?181939900 アクセス解析] -->
@@ -283,3 +289,6 @@
 <!-- <iframe src="http://rssmix.com/nb/583d38b5de610/" frameborder="0" marginheight="0" marginwidth="0" scrolling="NO" width="10000000" height="1000000"></iframe> -->
 
 <!-- https://www.youtube.com/watch?v=GLuoXwStQ-I -->
+
+<!-- 舊的神隱 LINE
+- <a id="line" href="javascript: if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){void(window.open('http://line.me/R/msg/text/?' + encodeURIComponent( document.title + '\n' + location.href + '\n\n' + document.getSelection())));}">分享到 <img src="line.png" /> Line</a> -->
