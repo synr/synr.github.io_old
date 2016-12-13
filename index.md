@@ -32,7 +32,7 @@
       2. 使用 [BootsWatch](http://bootswatch.com/) 做網站頂部下拉選單介面。
     - 程式語言高亮：使用 [highlightjs](https://highlightjs.org/)
       - 但，本站目前已另外裝 [Google 的 code\-prettify](https://github.com/google/code-prettify) 取代。
-    - [燈箱（Lightbox）](https://en.wikipedia.org/wiki/Lightbox\_\(JavaScript\))：[colorbox](http://www.jacklmoore.com/colorbox/)
+    - [燈箱（Lightbox）](https://ja.wikipedia.org/wiki/Lightbox)：[colorbox](http://www.jacklmoore.com/colorbox/)
       - ~~我還在摸索這要怎麼使用~~XD
       - 本站目前已經另外安裝 [fancybox](http://fancyapps.com/fancybox/#examples) 燈箱，並改寫相關內容。
       會自動讓網頁上的 ``<a>`` tag 都會優先以燈箱方式呈現目標。
@@ -51,7 +51,7 @@
   - 但是，~~我摸到現在只覺得視覺介面的排版結構很 Wiki 而已~~。
 原因如下：
     1. 畢竟是靜態網站，因此他不能連線資料庫等等，所以不能搜尋。
-    （可以搜尋的是另一個 CMS 系統：[amWiki](https://github.com/TevinLi/amWiki)）
+    （可以搜尋的是另一個 CMS 系統：[amWiki](https://atom.io/packages/amWiki)）
 如果都是公開頁面的話，只能仰賴搜尋引擎。
 但前提是有把 SEO 做好。
 或者也可以自己建搜尋功能，只是必須結合第三方平台來儲存紀錄當作資料庫。
