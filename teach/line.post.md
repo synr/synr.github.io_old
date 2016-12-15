@@ -373,7 +373,8 @@ Note：
 
   check_md_ok('himitsu','U2FsdGVkX1/8Dlvucd4lNnrh5nyHbocGnk5IiMbXiLg/TrZ8eg4XWlEw07GRbRMFt6T73WZ2oot07tYHTh8es4+pNEXLND1ucPDR8JQMJCDSnirW7J68JQa1oMt78lDvQuijtbpfGaCRNagxHy7bUaLDP2eK5CRAkkYxp707uiI=','2016.11.28');
 
-  window.setTimeout(reset_javascript_command_url,1000);   //window.setInterval(new_a_tag_javascript, 3000); //循環
+  //有資料夾結構的都要這樣做 //已寫入 index.html 所以不用再寫了
+  //window.setTimeout(reset_javascript_command_url,1000);   //window.setInterval(new_a_tag_javascript, 3000); //循環
 
 
 //https://blog.wu-boy.com/2010/10/jquery-%E5%81%B5%E6%B8%AC%E7%80%8F%E8%A6%BD%E5%99%A8%E7%89%88%E6%9C%AC-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1os-detection/

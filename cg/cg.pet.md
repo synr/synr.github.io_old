@@ -58,11 +58,17 @@ R5 寵物水晶 + R5 可用寵，範圍就是可幫採 R4 ~ R6。
 [gimmick:Disqus](mdwikiplay.disqus.com)
 
 <script type="text/javascript">
-        if (((localStorage['himitsu'] === undefined)||(localStorage['himitsu'] == null)||(localStorage['himitsu'] == '')||(localStorage['himitsu'] != x_de('U2FsdGVkX1+JmdT5RqbSz7+sT3yu5aLZYSVPHab+c6dr+ikvZv7QQXKylLyz+uBF7tsuk/TTUZcbWWmogzDIjHnKRtH4fvBEIlS4FdLEcuZYNQgWkuwHPcalbFmFEmFE2MvghDIdiJglI5eqhxAtmNFh/iawIZRAoFS3PHYvpAY=','2016')))) {
-          document.location = document.location.href.replace(/\#\!(.*.md)/gi,'#');
-          //history.back();             
-        }
-    localStorage.removeItem('himitsu');
+    //     if (((localStorage['himitsu'] === undefined)||(localStorage['himitsu'] == null)||(localStorage['himitsu'] == '')||(localStorage['himitsu'] != x_de('U2FsdGVkX1+JmdT5RqbSz7+sT3yu5aLZYSVPHab+c6dr+ikvZv7QQXKylLyz+uBF7tsuk/TTUZcbWWmogzDIjHnKRtH4fvBEIlS4FdLEcuZYNQgWkuwHPcalbFmFEmFE2MvghDIdiJglI5eqhxAtmNFh/iawIZRAoFS3PHYvpAY=','2016')))) {
+    //       document.location = document.location.href.replace(/\#\!(.*.md)/gi,'#');
+    //       //history.back();             
+    //     }
+    // localStorage.removeItem('himitsu');
+
+  //2016.12.01+ md 白名跟嘿共用模式
+  check_md_ok('himitsu','U2FsdGVkX1+JmdT5RqbSz7+sT3yu5aLZYSVPHab+c6dr+ikvZv7QQXKylLyz+uBF7tsuk/TTUZcbWWmogzDIjHnKRtH4fvBEIlS4FdLEcuZYNQgWkuwHPcalbFmFEmFE2MvghDIdiJglI5eqhxAtmNFh/iawIZRAoFS3PHYvpAY=','2016');
+
+  //有資料夾結構的都要這樣做 //已寫入 index.html 所以不用再寫了
+  //window.setTimeout(reset_javascript_command_url,1000);   //window.setInterval(new_a_tag_javascript, 3000); //循環
 </script>
 
 <!-- 
