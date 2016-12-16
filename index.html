@@ -928,7 +928,7 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
             if (ext.match(/.*jpg$/i)!=null){
                 // console.log(ext + ' = jpg');
                 a_tag.setAttribute('class', 'fancybox-thumb');
-                if(a_tag.getAttribute('rel')!='no'){
+                if(a_tag.getAttribute('rel')!='no'){                  //這是後來加的，有些圖片也用燈箱但是不想秀，就可以這樣。
                   a_tag.setAttribute('rel', 'fancybox-thumb');
                 }
                 a_tag.setAttribute('data-fancybox-type', 'image');
@@ -1421,12 +1421,23 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
     <!-- <script async type="text/javascript" src="screenfull.js"></script> -->
     <script defer type="text/javascript" src="screenfull.js"></script>
     <script type="text/javascript">
-        function max_full(iframe_id,trigger_item){
-            document.getElementById(trigger_item).addEventListener('click', () => {
-                if (screenfull.enabled) {
-                    screenfull.request(document.getElementById(iframe_id));
-                }
-            });
+        function max_full(target_obj='',trigger_item=''){
+            if ( (target_obj!='') && (trigger_item!='')){
+              target_obj = ( (typeof(target_obj) == "object")  ?   target_obj   :  ( (typeof(target_obj) == "string") ? document.getElementById(target_obj) : ''  )  );
+              trigger_item = ( (typeof(trigger_item) == "object")  ?   trigger_item   :  ( (typeof(trigger_item) == "string") ? document.getElementById(trigger_item) : ''  )  );
+
+              if(  (typeof(target_obj)== "object") && (typeof(trigger_item)== "object")  ){
+                  trigger_item.addEventListener('click', () => {
+                      if (screenfull.enabled) {
+                          screenfull.request(target_obj);
+                      }
+                  });
+              }else{
+                console.error('代入的型態有誤');
+              }
+            }else{
+              console.error('代入值只能是物件或物件的 ID 字串，且兩者不可為空：max_full(iframe_id=\'\',trigger_item=\'\')');
+            }
         }
     </script>
 <!-- 全螢幕功能_結束 -->
@@ -2090,19 +2101,48 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
         //2016.11.29+ catch error
         function x_de(word,namae){
             var output = '';
+
+            //2016.12.17+ 錯誤過多的通報 + 時間鎖
+            var now = new Date().getTime();//console.info('now = ' + now);
+            var error_msg = '你在這個項目的錯誤次數過多。\n系統已經自動將此項目功能凍結！\n\n如果是一時忘記，請在 24 小時後再來嘗試。\n也就是 ' + new Date(now + 1000*60*60*24) + ' 之後。\n\nPS：現在這個項目已凍結，再錯只是再加長時間。';
+            //2016.12.17+
+            function error_too_more_close_item(){
+                localStorage['error_time_' + md5(word)]  = now; //錯的時候又刷新新的24小時（這觸發點跟 welcome 相反。Welcome 是超過 24小時才會觸發一次。這個是要24小時內每次觸發。所以是用 標記時間 > 現在）
+                alert(error_msg);
+                console.error(error_msg);
+                return false;
+            }
+
+            if( ((parseInt(localStorage['error_time_' + md5(word)]) + 1000*60*60*24) < now)){//} &&  (localStorage['error_time_' + md5(word)]!=null)  ){
+                localStorage.removeItem('error_read_' + md5(word));
+                localStorage.removeItem('error_time_' + md5(word));
+            }
+            if ((parseInt(localStorage['error_read_' + md5(word)]) >= 10) && ((parseInt(localStorage['error_time_' + md5(word)]) + 1000*60*60*24) > now) &&  (localStorage['error_time_' + md5(word)]!=null) ) {
+                return error_too_more_close_item();
+            }
+
             try {
                output = GibberishAES.dec(word,namae);
             }catch (e) {
-                if((localStorage['error_read_' + md5(word)] === undefined)||(localStorage['error_read_' + md5(word)] == null)||(localStorage['error_read_' + md5(word)] == '')){
-                    localStorage['error_read_' + md5(word)] = 1;
-                }else{
-                    localStorage['error_read_' + md5(word)] = parseInt(localStorage['error_read_' + md5(word)]) + 1;
-                }
                 if(e.toString()=='Decryption error: Maybe bad key'){
                     console.error('是這樣念嗎？你書都讀去裡？');
+                    //2016.12.17+
+                    localStorage['error_time_' + md5(word)]  = now;
+                    if((localStorage['error_read_' + md5(word)] === undefined)||(localStorage['error_read_' + md5(word)] == null)||(localStorage['error_read_' + md5(word)] == '')){
+                        localStorage['error_read_' + md5(word)] = 1;
+                    }else{
+                        localStorage['error_read_' + md5(word)] = parseInt(localStorage['error_read_' + md5(word)]) + 1;
+
+                        //2016.12.17+ 錯誤過多的通報 跟 時間鎖
+                        if(parseInt(localStorage['error_read_' + md5(word)]) == 10){
+                          JANDI_webhooks('網站有人錯誤試行次數過多！','#FF1111','錯誤次數：' + localStorage['error_read_' + md5(word)],'相關代號：' + word + '\n解凍時間：' + new Date(now + 1000*60*60*24),'',1,'https://wh.jandi.com/connect-api/webhook/11691684/3b6e6071e481e436605261583eff0177');
+                            return error_too_more_close_item();
+                        }
+                    }
                 }else{
                     console.log('執行發生未知錯誤 = ' + e.toString());
                 }
+                return false;
             }
             return output;
         }
@@ -2163,6 +2203,8 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
 
             //2016.12.15 + inline 化
             var my_inline = '<h4 style=\"line-height: 1px;text-align: center;margin-top: 14px;margin-bottom: 5px;font-family:' + localStorage['font'] + '\">來者何人！暗號！</h4><br /><input type=\"text\" onkeyup=\"document.getElementById(\'himitsu\').onkeydown=function(event){if(event.which==13){ document.getElementById(\'enter_button\').click();}}\" style=\"width: 100%;text-align: center;-webkit-transition: all 2s ease 0s;-moz-transition: all 2s ease 0s;-ms-transition: all 2s ease 0s;-o-transition: all 2s ease 0s;\" id=\"himitsu\" placeholder=\"暗號正確才開\" autofocus><br /><button id=\"enter_button\" style=\"width: 100%;text-align: center;text-decoration: none;cursor: pointer; padding: 0px 46px;\" onclick=\"javascript:console.log(enter_himitsu(\'' + word + '\',document.getElementById(\'himitsu\').value,\'' + type_switch + '\',' + wrangway_not_close + '));clearInterval(focusid);document.getElementById(\'himitsu\').focus();\">你確定？</botton>';
+            //2016.12.17+ 把 KEY 的觸發監控統一 給 function focusme()
+            //var my_inline = '<h4 style=\"line-height: 1px;text-align: center;margin-top: 14px;margin-bottom: 5px;font-family:' + localStorage['font'] + '\">來者何人！暗號！</h4><br /><input type=\"text\" style=\"width: 100%;text-align: center;-webkit-transition: all 2s ease 0s;-moz-transition: all 2s ease 0s;-ms-transition: all 2s ease 0s;-o-transition: all 2s ease 0s;\" id=\"himitsu\" placeholder=\"暗號正確才開\" autofocus><br /><button id=\"enter_button\" style=\"width: 100%;text-align: center;text-decoration: none;cursor: pointer; padding: 0px 46px;\" onclick=\"javascript:console.log(enter_himitsu(\'' + word + '\',document.getElementById(\'himitsu\').value,\'' + type_switch + '\',' + wrangway_not_close + '));clearInterval(focusid);document.getElementById(\'himitsu\').focus();\">你確定？</botton>';
 
               fancybox_inline(my_inline,beforeload_func=null,afterload_func=focusme(),beforeclose_func=null,afterclose_func=null,cancel_func=null);
 
@@ -2209,10 +2251,11 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
                           //return true;
                           //alert('Tab');
                           break;
-                        // case 13:
+                        case 13:
                         //   //return true;
                         //   //alert('Enter');
-                        //   break;
+                          document.getElementById('line_for_admin').click();
+                          break;
                         case 27:
                           //return true;
                           //alert('ESC');
@@ -2241,6 +2284,56 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
                               document.getElementById('line_for_admin').click();
                               console.info('提交！');
                          }
+                         // if(keycode == 9 && evt.altKey){
+                         //     console.info('換個視窗別緊張');
+                         // }
+                      //});
+                  });
+                }
+                //himitsu
+                if((document.getElementById('himitsu')!=null) && (document.getElementById('enter_button')!=null)){                
+                  document.getElementById('himitsu').addEventListener('keydown', (evt) => {
+                      //http://www.felix021.com/blog/read.php?1171
+                      evt = (evt) ? evt : ((window.event) ? window.event : e) //兼容IE和Firefox獲得keyBoardEvent對象
+                      var keycode = evt.keyCode?evt.keyCode:evt.which; //兼容IE和Firefox獲得keyBoardEvent對象的鍵值
+                      switch(keycode){
+                        //case 9:
+                          //return true;
+                          //alert('Tab');
+                         // break;
+                        //case 13:
+                        //   //return true;
+                        //   //alert('Enter');
+                          //document.getElementById('enter_button').click();
+                          //break;
+                        case 27:
+                          //return true;
+                          //alert('ESC');
+                          $.fancybox.close();
+                          break;
+                        // case 38:
+                        //   //return true;
+                        //   //alert('↑');
+                        //   break;
+                        // case 40:
+                        //   //return true;
+                        //   //alert('↓');
+                        //   break;
+                        // case 39:
+                        //   //return true;
+                        //   //alert('←');
+                        //   break;
+                        // case 37:
+                        //   //return true;
+                        //   //alert('→');
+                        //   break;
+                      }
+                      //https://ruby-china.org/topics/10023
+                      //$("input").keydown(function(e){
+                         // if(keycode == 13 && evt.ctrlKey){
+                         //      document.getElementById('enter_button').click();
+                         //      console.info('提交！');
+                         // }
                          // if(keycode == 9 && evt.altKey){
                          //     console.info('換個視窗別緊張');
                          // }
@@ -2556,7 +2649,7 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
             }
           }
         }
-        //2016.12.09+ 選單特效
+        //2016.12.09+ 匹配選單特效
         //https://www.minwt.com/webdesign-dev/html/16745.html
         function menu_effect_set(){
           var target_tag = document.getElementsByTagName('ul');
