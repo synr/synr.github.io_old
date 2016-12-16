@@ -4,7 +4,19 @@
 這個系統只有一個 ``*.html`` 檔案，應該不會搞錯吧XD！
 會寫成 ``*.html``，只是單純有可能每個人命名不一樣。最多的可能是叫做 ``index.html`` 。
 
-## \[2016.12.14\]
+## \[2016.12.16\] 燈箱 UI 體驗優化
+
+- 燈箱介面優化：毛玻璃、緩動畫、焦點控制
+- 燈箱 funtion 修正：創 inline
+- LINE ME UI 功能強化（外觀維持原樣）
+- LINE ME 功能更正
+- JANDI format 更新
+- 增加瀏覽次數觀察條件 50
+
+## \[2016.12.15\] 修掉秘密基地內部早期錯誤。
+
+
+## \[2016.12.14\] [bootswatch CDN](netdna.bootstrapcdn.com/bootswatch/3.3.7/) 更新
 
 - [bootswatch CDN](netdna.bootstrapcdn.com/bootswatch/3.3.7/) ~~全面~~（不含 amelia） 從 3.0.0 更新到 3.3.7
 

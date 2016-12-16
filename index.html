@@ -1298,6 +1298,7 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
                     //     }
                     // }
                     //----針對 X-Frame-Options 確定的網域，在這裡作手動排除。
+                    css_add_inline('#md-all{/*opacity: 1;*/filter: blur(5px);-webkit-transition: all 1.5s ease;-moz-transition: all 1.5s ease; -ms-transition: all 1.5s ease;-o-transition: all 1.5s ease;transition: all 1.5s ease;}');
                     fancybox_check_before(this);
                 },
                 afterLoad: function() {
@@ -1365,6 +1366,7 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
 
                 },
                 afterClose: function() {
+                    css_add_inline('#md-all{/*opacity: 1;*/filter: blur(0px);-webkit-transition: all 1.5s ease;-moz-transition: all 1.5s ease; -ms-transition: all 1.5s ease;-o-transition: all 1.5s ease;transition: all 1.5s ease;}');
                     console.log('已關閉');
                 },
                 helpers : {
@@ -1387,8 +1389,19 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
                 autoResize  : true,
                 prevEffect  : 'none',
                 nextEffect  : 'none',
+                beforeLoad: function() {
+                      //fancybox_check_before(this);
+                    css_add_inline('#md-all{/*opacity: 1;*/filter: blur(10px);-webkit-transition: all 1.5s ease;-moz-transition: all 1.5s ease; -ms-transition: all 1.5s ease;-o-transition: all 1.5s ease;transition: all 1.5s ease;}');
+                },
                 afterLoad: function() {
                     this.title = '<center><a style=\"font-family:' + localStorage['font'] + '\" href="' + this.href + '" target="_blank" style="color:#fff">→ 點此用新視窗開啟原始圖片 ←</a><br />（<a style=\"font-family:' + localStorage['font'] + '\" href="' + this.href + '" target="_blank" style="color:#fff" download>點此直接另存圖片</a>）</center>';
+                    //2016.12.16+
+                    //https://trello.com/c/CARLvRoh/921-bootstrap-bootstrap-ios
+                },
+                afterClose: function() {
+                    //https://trello.com/c/CARLvRoh/921-bootstrap-bootstrap-ios
+                    css_add_inline('#md-all{/*opacity: 1;*/filter: blur(0px);-webkit-transition: all 1s ease;-moz-transition: all 1s ease; -ms-transition: all 1s ease;-o-transition: all 1s ease;transition: all 1s ease;}');
+                    console.log('已關閉 by 圖庫');
                 },
                 helpers : {
                     title   : {
@@ -1702,12 +1715,15 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
                       console.log('已取消');
                   },
                   beforeClose: function() {
+                      css_add_inline('#md-all{/*opacity: 0.9;*/filter: blur(3px);-webkit-transition: all 1.5s ease;-moz-transition: all 1.5s ease; -ms-transition: all 1.5s ease;-o-transition: all 1.5s ease;transition: all 1.5s ease;}');
                       console.log('要關閉了 by 獨立');
                   },
                   afterClose: function() {
+                      css_add_inline('#md-all{/*opacity: 1;*/filter: blur(0px);-webkit-transition: all 1.5s ease;-moz-transition: all 1.5s ease; -ms-transition: all 1.5s ease;-o-transition: all 1.5s ease;transition: all 1.5s ease;}');
                       console.log('已關閉 by 獨立');
                   },
                   beforeLoad: function() {
+                      css_add_inline('#md-all{/*opacity: 0.7;*/filter: blur(5px);-webkit-transition: all 1.5s ease;-moz-transition: all 1.5s ease; -ms-transition: all 1.5s ease;-o-transition: all 1.5s ease;transition: all 1.5s ease;}');
                       fancybox_check_before(this);
                   },
                   afterLoad: function() {
@@ -1915,7 +1931,8 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
             if(userinfo_show){
               var user_info_string = '瀏覽器/系統版本 詳細資訊：\n' + navigator.userAgent + '\n' + 
               '所在頁面標題：[' + document.title + '](' + location.href + ')\n' +
-              '視窗寬度 X 網頁長度：' + $(document).width() + ' X ' + $(document).height() + '\n' + 
+              '網頁寬度 X 網頁長度：' + $(document).width() + ' X ' + $(document).height() + '\n' + 
+              '螢幕解析度（寬 X 高、色彩位元）：' + screen.width + ' X ' + screen.height + ' ' + (  ((screen.colorDepth>16) &&(screen.colorDepth<=32)) ? '全彩 32 位元'  : (  (screen.colorDepth==16) ? '高彩 16 位元' :  '16 位元以下'  ) ) + '\n' + 
               '瀏覽器介面語言：' + navigator.language + '\n' + 
               '可能會的語言：' + navigator.languages + '\n' + 
               '是否開啟 cookie 功能：' + ((navigator.cookieEnabled)?'已開啟':'沒開啟') + '\n' + 
@@ -2082,9 +2099,9 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
                     localStorage['error_read_' + md5(word)] = parseInt(localStorage['error_read_' + md5(word)]) + 1;
                 }
                 if(e.toString()=='Decryption error: Maybe bad key'){
-                    console.log('是這樣念嗎？你書都讀去裡？');
+                    console.error('是這樣念嗎？你書都讀去裡？');
                 }else{
-                    console.log('執行發生錯誤 = ' + e.toString());
+                    console.log('執行發生未知錯誤 = ' + e.toString());
                 }
             }
             return output;
@@ -2147,6 +2164,115 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
             //2016.12.15 + inline 化
             var my_inline = '<h4 style=\"line-height: 1px;text-align: center;margin-top: 14px;margin-bottom: 5px;font-family:' + localStorage['font'] + '\">來者何人！暗號！</h4><br /><input type=\"text\" onkeyup=\"document.getElementById(\'himitsu\').onkeydown=function(event){if(event.which==13){ document.getElementById(\'enter_button\').click();}}\" style=\"width: 100%;text-align: center;-webkit-transition: all 2s ease 0s;-moz-transition: all 2s ease 0s;-ms-transition: all 2s ease 0s;-o-transition: all 2s ease 0s;\" id=\"himitsu\" placeholder=\"暗號正確才開\" autofocus><br /><button id=\"enter_button\" style=\"width: 100%;text-align: center;text-decoration: none;cursor: pointer; padding: 0px 46px;\" onclick=\"javascript:console.log(enter_himitsu(\'' + word + '\',document.getElementById(\'himitsu\').value,\'' + type_switch + '\',' + wrangway_not_close + '));clearInterval(focusid);document.getElementById(\'himitsu\').focus();\">你確定？</botton>';
 
+              fancybox_inline(my_inline,beforeload_func=null,afterload_func=focusme(),beforeclose_func=null,afterclose_func=null,cancel_func=null);
+
+              focusme();
+              focusid = window.setInterval(focusme, 500);
+              console.info(focusid);
+        }
+
+              //2016.12.16+ 將焦點 functiion 化並提到公域，並附加鍵盤控制。
+              function focusme(){
+                function return_to_zero(){
+                    if(focusid!=0){
+                      clearInterval(focusid);
+                      focusid = 0;
+                      console.info(focusid);
+                    }
+                }
+                //2016.12.15+ 解決 BUG
+                if(document.getElementById('himitsu')!=null){
+                  document.getElementById('himitsu').focus();
+                  console.log('已聚焦');
+                }else{
+                  if(document.getElementById('myform_text')!=null){
+                    document.getElementById('myform_text').focus();
+                    console.log('已聚焦');
+                  }else{
+                    return_to_zero();
+                  }
+                }
+                //line_me()
+                if((document.getElementById('myform_text')!=null) && (document.getElementById('name')!=null)){                
+                  document.getElementById('name').addEventListener('click', () => {
+                    return_to_zero();
+                  });
+                  document.getElementById('name').addEventListener('focus', () => {
+                    return_to_zero();
+                  });
+                  document.getElementById('myform_text').addEventListener('keydown', (evt) => {
+                      //http://www.felix021.com/blog/read.php?1171
+                      evt = (evt) ? evt : ((window.event) ? window.event : e) //兼容IE和Firefox獲得keyBoardEvent對象
+                      var keycode = evt.keyCode?evt.keyCode:evt.which; //兼容IE和Firefox獲得keyBoardEvent對象的鍵值
+                      switch(keycode){
+                        case 9:
+                          //return true;
+                          //alert('Tab');
+                          break;
+                        // case 13:
+                        //   //return true;
+                        //   //alert('Enter');
+                        //   break;
+                        case 27:
+                          //return true;
+                          //alert('ESC');
+                          $.fancybox.close();
+                          break;
+                        // case 38:
+                        //   //return true;
+                        //   //alert('↑');
+                        //   break;
+                        // case 40:
+                        //   //return true;
+                        //   //alert('↓');
+                        //   break;
+                        // case 39:
+                        //   //return true;
+                        //   //alert('←');
+                        //   break;
+                        // case 37:
+                        //   //return true;
+                        //   //alert('→');
+                        //   break;
+                      }
+                      //https://ruby-china.org/topics/10023
+                      //$("input").keydown(function(e){
+                         if(keycode == 13 && evt.ctrlKey){
+                              document.getElementById('line_for_admin').click();
+                              console.info('提交！');
+                         }
+                         // if(keycode == 9 && evt.altKey){
+                         //     console.info('換個視窗別緊張');
+                         // }
+                      //});
+                  });
+                }
+              }
+
+
+              // function focusme(){
+              //   //2016.12.15+ 解決 BUG
+              //   switch(1){
+              //     case (document.getElementById('himitsu')!=null) :
+              //       document.getElementById('himitsu').focus();
+              //       console.log('已聚焦');
+              //       break;
+              //     case (document.getElementById('myform_text')!=null) :
+              //       document.getElementById('myform_text').focus();
+              //       console.log('已聚焦');
+              //       break;
+              //     default:
+              //       if(focusid!=0){
+              //         clearInterval(focusid);
+              //         focusid = 0;
+              //         console.info(focusid);
+              //       }
+              //   }
+              // }
+
+        //2016.12.16+ 直接在燈箱裡面建構 HTML（常用在表單
+        function fancybox_inline(my_inline='',beforeload_func=null,afterload_func=null,beforeclose_func=null,afterclose_func=null,cancel_func=null){
+          if(my_inline!=''){
             $.fancybox.open({
                 href: my_inline,
                 type: 'inline',
@@ -2162,59 +2288,62 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
                   // openEffect  : 'none',
                   // closeEffect : 'none',
                   onCancel: function() {
+                      if(cancel_func!=null){
+                        cancel_func();
+                      }
                       console.log('已取消');
                   },
                   beforeClose: function() {
-                      console.log('要關閉了 by 獨立');
+                      if(beforeclose_func!=null){
+                        beforeclose_func();
+                      }
+                      css_add_inline('#md-all{/*opacity: 0.7;*/filter: blur(2px);-webkit-transition: all 1.5s ease;-moz-transition: all 1.5s ease; -ms-transition: all 1.5s ease;-o-transition: all 1.5s ease;transition: all 1s ease;}');
+                      console.log('要關閉了 by 獨立建構');
                   },
                   afterClose: function() {
-                      console.log('已關閉 by 獨立');
+                      if(afterclose_func!=null){
+                        afterclose_func();
+                      }
+                      //https://trello.com/c/CARLvRoh/921-bootstrap-bootstrap-ios
+                      css_add_inline('#md-all{/*opacity: 1;*/filter: blur(0px);-webkit-transition: all 1.5s ease;-moz-transition: all 1.5s ease; -ms-transition: all 1.5s ease;-o-transition: all 1.5s ease;transition: all 1s ease;}');
+                      console.log('已關閉 by 獨立建構');
                   },
                   beforeLoad: function() {
+                      if(beforeload_func!=null){
+                        beforeload_func();
+                      }
                       //fancybox_check_before(this);
+                        css_add_inline('#md-all{/*opacity: 0.5;*/filter: blur(5px);-webkit-transition: all 1.5s ease;-moz-transition: all 1.5s ease; -ms-transition: all 1.5s ease;-o-transition: all 1.5s ease;transition: all 1.5s ease;}');
                   },
                   afterLoad: function() {
-                      // var iframeAll_array = document.getElementsByTagName( "iframe" );
-                      // var iframe_id = '';
-                      // for (var i = 0; i < iframeAll_array.length; i++) {
-
-                      //     if(iframeAll_array[i].id.match(/^fancybox.*/i)){
-                      //         iframe_id = iframeAll_array[i].id.match(/^fancybox.*/i);
-                      //         console.log(i + ' = 燈箱 id = ' + iframeAll_array[i].id.match(/^fancybox.*/i));
-                      //         console.log(i + ' = 燈箱網址 = ' + iframeAll_array[i].src);
-                      //     }
-                      // }
-                      if(document.getElementById('himitsu')!=null){
-                        document.getElementById('himitsu').focus();
-                        console.log('已聚焦');
+                      if(afterload_func!=null){
+                        afterload_func();
                       }
+                        //2016.12.16+
+                        //https://trello.com/c/CARLvRoh/921-bootstrap-bootstrap-ios
+                        css_add_inline('#md-all{/*opacity: 1;*/filter: blur(5px);-webkit-transition: all 1.5s ease;-moz-transition: all 1.5s ease; -ms-transition: all 1.5s ease;-o-transition: all 1.5s ease;transition: all 1.5s ease;}');
                   },
                   helpers : {
                       title : {
                           type : 'over'
                       }
                   }
-
             });
-
-              function focusme(){
-                //2016.12.15+ 解決 BUG
-                if(document.getElementById('himitsu')!=null){
-                  document.getElementById('himitsu').focus();
-                  console.log('已聚焦');
-                }else{
-                  if(focusid!=0){
-                    clearInterval(focusid);
-                    focusid = 0;
-                  }
-                }
-              }
-              focusid = window.setInterval(focusme, 500);
-              console.log(focusid);
+          }else{
+            console.info('fancybox_inline(my_inline=\'\',beforeload_func=null,afterload_func=null,beforeclose_func=null,afterclose_func=null,cancel_func=null)');
+          }
         }
 
         function line_me(){
-          $.fancybox.open('<h3 style=\"line-height: 1px;text-align: center;margin-top: 14px;margin-bottom: 5px;font-family:' + localStorage['font'] + '\">直接發 LINE 訊息給站長！</h3><br /><form action=\"#\" onsubmit=\"javascript:return false\"><input type=\"text\" style=\"width:100%;-webkit-transition: all 2s ease 0s;-moz-transition: all 2s ease 0s;-ms-transition: all 2s ease 0s;-o-transition: all 2s ease 0s;\" id=\"name\" onkeyup=\"javascript:localStorage[\'name\']=this.value;\" onchange=\"javascript:localStorage[\'name\']=this.value;\" placeholder=\"請填寫稱呼（非必要）\" /><br /> <textarea style=\"width:100%;-webkit-transition: all 2s ease 0s;-moz-transition: all 2s ease 0s;-ms-transition: all 2s ease 0s;-o-transition: all 2s ease 0s;\" id=\"myform_text\" rows=\"10\" cols=\"50\" onkeyup=\"javascript:localStorage[\'myform_text\']=this.value;\" onchange=\"javascript:localStorage[\'myform_text\']=this.value;\" placeholder=\"請隨意留言喔\" autofocus=\"\"></textarea><br /><a href=\"javascript:report_webhooks(\'LINE\',document.getElementById(\'myform_text\').value,0,document.getElementById(\'name\').value);document.getElementById(\'myform_text\').value=\'\';document.getElementById(\'name\').value=\'\';localStorage[\'myform_text\']=\'\';localStorage[\'name\']=\'\';$.fancybox.open(\'已完成你發送的 LINE 訊息給站長。<br />謝謝你的留言！<br /><br />如果你希望有專人回覆你 LINE。<br />請加本站的 LINE：<br />https://line.me/R/ti/p/%40uwk0684z<br />LINE ID = @uwk0684z<br /><br />也可以隨時按本站的交流，到下方加好友！<br /><br />另一隻巴哈姆特動畫瘋的 LINE 機器人，<br />也歡迎使用XD　將不定期更新！<br /><br />當然，你也可以從網站右下角，<br />直接找到站長線上對談。<br /><br />如果以上管道都不方便，<br />也歡迎你留下其他聯絡方式。<br />讓我們與你聯絡！\');\"><img style=\'text-align: center;text-decoration: none;cursor: pointer;vertical-align:middle;\' src=\'line_me.png\'></a></form>');
+          //$.fancybox.open('<h3 style=\"line-height: 1px;text-align: center;margin-top: 14px;margin-bottom: 5px;font-family:' + localStorage['font'] + '\">直接發 LINE 訊息給站長！</h3><br /><form action=\"#\" onsubmit=\"javascript:return false\"><input type=\"text\" style=\"width:100%;-webkit-transition: all 2s ease 0s;-moz-transition: all 2s ease 0s;-ms-transition: all 2s ease 0s;-o-transition: all 2s ease 0s;\" id=\"name\" onkeyup=\"javascript:localStorage[\'name\']=this.value;\" onchange=\"javascript:localStorage[\'name\']=this.value;\" placeholder=\"請填寫稱呼（非必要）\" /><br /> <textarea style=\"width:100%;-webkit-transition: all 2s ease 0s;-moz-transition: all 2s ease 0s;-ms-transition: all 2s ease 0s;-o-transition: all 2s ease 0s;\" id=\"myform_text\" rows=\"10\" cols=\"50\" onkeyup=\"javascript:localStorage[\'myform_text\']=this.value;\" onchange=\"javascript:localStorage[\'myform_text\']=this.value;\" placeholder=\"請隨意留言喔\" autofocus=\"\"></textarea><br /><a href=\"javascript:JANDI_webhooks(\'有人發 LINE 給你！\\n\\n留言內容：\\n\' + document.getElementById(\'myform_text\').value + \'\\n\\n署名：\' + document.getElementById(\'name\').value,\'green\',\'LINE\',\'單向發 LINE 給站長\',document.location.href,1);report_webhooks(\'LINE\',document.getElementById(\'myform_text\').value,0,document.getElementById(\'name\').value);document.getElementById(\'myform_text\').value=\'\';document.getElementById(\'name\').value=\'\';localStorage[\'myform_text\']=\'\';localStorage[\'name\']=\'\';$.fancybox.open(\'已完成你發送的 LINE 訊息給站長。<br />謝謝你的留言！<br /><br />如果你希望有專人回覆你 LINE。<br />請加本站的 LINE：<br />https://line.me/R/ti/p/%40uwk0684z<br />LINE ID = @uwk0684z<br /><br />也可以隨時按本站的交流，到下方加好友！<br /><br />另一隻巴哈姆特動畫瘋的 LINE 機器人，<br />也歡迎使用XD　將不定期更新！<br /><br />當然，你也可以從網站右下角，<br />直接找到站長線上對談。<br /><br />如果以上管道都不方便，<br />也歡迎你留下其他聯絡方式。<br />讓我們與你聯絡！\');\"><img style=\'text-align: center;text-decoration: none;cursor: pointer;vertical-align:middle;\' src=\'line_me.png\'></a></form>');
+          var my_inline = '<h3 style=\"line-height: 1px;text-align: center;margin-top: 14px;margin-bottom: 5px;font-family:' + localStorage['font'] + '\">直接發 LINE 訊息給站長！</h3><br /><form action=\"#\" onsubmit=\"javascript:return false\"><input type=\"text\" style=\"width:100%;-webkit-transition: all 2s ease 0s;-moz-transition: all 2s ease 0s;-ms-transition: all 2s ease 0s;-o-transition: all 2s ease 0s;\" id=\"name\" onkeyup=\"javascript:localStorage[\'name\']=this.value;\" onchange=\"javascript:localStorage[\'name\']=this.value;\" placeholder=\"請填寫稱呼（非必要）\" /><br /> <textarea style=\"width:100%;-webkit-transition: all 2s ease 0s;-moz-transition: all 2s ease 0s;-ms-transition: all 2s ease 0s;-o-transition: all 2s ease 0s;\" id=\"myform_text\" rows=\"10\" cols=\"50\" onkeyup=\"javascript:localStorage[\'myform_text\']=this.value;\" onchange=\"javascript:localStorage[\'myform_text\']=this.value;\" placeholder=\"\n請隨意留言喔\n\nCtrl + Enter 可以直接快速提交訊息給站長！\nESC 可暫時取消留言。\" autofocus=\"\"></textarea><br /><a id=\"line_for_admin\" href=\"javascript:JANDI_webhooks(\'有人發 LINE 給你！\\n\\n留言內容：\\n\' + document.getElementById(\'myform_text\').value + \'\\n\\n署名：\' + document.getElementById(\'name\').value,\'green\',\'LINE\',\'單向發 LINE 給站長\',document.location.href,1);report_webhooks(\'LINE\',document.getElementById(\'myform_text\').value,0,document.getElementById(\'name\').value);document.getElementById(\'myform_text\').value=\'\';document.getElementById(\'name\').value=\'\';localStorage[\'myform_text\']=\'\';localStorage[\'name\']=\'\';fancybox_inline(\'已完成你發送的 LINE 訊息給站長。<br />謝謝你的留言！<br /><br />如果你希望有專人回覆你 LINE。<br />請加本站的 LINE：<br />https://line.me/R/ti/p/%40uwk0684z<br />LINE ID = @uwk0684z<br /><br />也可以隨時按本站的交流，到下方加好友！<br /><br />另一隻巴哈姆特動畫瘋的 LINE 機器人，<br />也歡迎使用XD　將不定期更新！<br /><br />當然，你也可以從網站右下角，<br />直接找到站長線上對談。<br /><br />如果以上管道都不方便，<br />也歡迎你留下其他聯絡方式。<br />讓我們與你聯絡！\',beforeload_func=null,afterload_func=focusme(),beforeclose_func=null,afterclose_func=null,cancel_func=null);\"><img style=\'text-align: center;text-decoration: none;cursor: pointer;vertical-align:middle;\' src=\'line_me.png\'></a></form>';
+
+            //2016.12.16+
+            fancybox_inline(my_inline,beforeload_func=null,afterload_func=focusme(),beforeclose_func=null,afterclose_func=null,cancel_func=null);
+            focusme();
+            focusid = window.setInterval(focusme, 500);
+            console.info(focusid);
+
             if (!((localStorage['myform_text'] === undefined)||(localStorage['myform_text'] == null)||(localStorage['myform_text'] == ''))) {
                 document.getElementById('myform_text').value = localStorage['myform_text'];
             }
@@ -2260,7 +2389,7 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
             localStorage['welcome_conut'] = (localStorage['welcome_conut']==null) ? 1 : parseInt(localStorage['welcome_conut']) + 1;
           }
 
-          if( (localStorage['welcome']=='') || ((parseInt(localStorage['welcome']) + 1000*60*60*24) < now) ){
+          if( (localStorage['welcome']=='') || ((parseInt(localStorage['welcome']) + 1000*60*60*24) < now) || (parseInt(localStorage['welcome_conut'])==50) ) {
               var uname = '路人';
               switch (navigator.userAgent){
                   case 'Mozilla/5.0 (Linux; Android 4.4.2; InFocus M320 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.85 Mobile Safari/537.36':
@@ -2286,8 +2415,13 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
                     alert('感謝ㄅㄅ 今天首次用電腦協助測試（不');
                     break;
               }
-              localStorage['welcome_conut'] = 1;
-              JANDI_webhooks('【來自各方 MDwiki 系統 每日訪客來訪紀錄】','#0ce3ac','訪客資訊','訪客名稱：' + uname,'',1,'https://wh.jandi.com/connect-api/webhook/11691684/3b6e6071e481e436605261583eff0177');
+              if(localStorage['welcome_conut'] == 50){
+                JANDI_webhooks('【來自各方 MDwiki 系統 訪客爆訪紀錄】','#C48415','訪客資訊','訪客名稱：' + uname,'',1,'https://wh.jandi.com/connect-api/webhook/11691684/3b6e6071e481e436605261583eff0177');
+              }else{
+                localStorage['welcome_conut'] = 1;
+                JANDI_webhooks('【來自各方 MDwiki 系統 每日訪客來訪紀錄】','#0ce3ac','訪客資訊','訪客名稱：' + uname,'',1,'https://wh.jandi.com/connect-api/webhook/11691684/3b6e6071e481e436605261583eff0177');
+              }
+
               localStorage['welcome']  = now; //超過一天或沒做過的話才做，並刷新。
           }else{
              console.log('哇！你今天來過 ' + localStorage['welcome_conut'] + ' 次了！');
