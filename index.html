@@ -11,10 +11,13 @@
     <title>MDwiki</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="fragment" content="!">
+
     <!-- https://www.minwt.com/webdesign-dev/html/16745.html -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+
     <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
     <meta charset="UTF-8">
+
     <!--https://developers.facebook.com/docs/sharing/webmasters -->
     <!--http://littleshell-multimedia.blogspot.tw/2011/03/facebook-sharer.html http://littleshell-multimedia.blogspot.tw/2013/10/facebook-sharer-description-title-image.html-->
     <meta property="og:title" content="⎝◕‿◕⎠ MDwiki 試玩中"/>
@@ -22,11 +25,13 @@
     <meta property="og:description" content="⎝◕‿◕⎠ MDwiki 試玩中：我目前剛開始試玩中。意在記錄操作備忘兼分享方法。但這個網站不一定會永久存在。"/>
     <meta property="og:url" content="http://landerso.at-ninja.jp/" />
     <!--http://littleshell-multimedia.blogspot.tw/2011/03/facebook-sharer.html http://littleshell-multimedia.blogspot.tw/2013/10/facebook-sharer-description-title-image.html-->
+
+    <!-- https://blog.gtwang.org/web-development/android-chrome-browser-theme-color-support/ -->    
     <meta name="theme-color" content="#FFFFFF">
-    <!-- https://blog.gtwang.org/web-development/android-chrome-browser-theme-color-support/ -->
 
     <style type="text/css">
         /*http://ifontcloud.com/index/fontKnowledge_9.jsp*/
+        
         .arwf-loading body { /*Web Font正在載入中，不顯示文字*/
               opacity: 0;
               visibility: hidden;
@@ -82,29 +87,29 @@
            url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.woff) format('woff'),
            url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.ttf) format('truetype');
     }
+    /*
+        @font-face {
+          font-family: 'sptest';
+          font-style: normal;
+          font-weight: 500;
+          src: url(font/sp_test.ttf);
+          src: url(font/sp_test.ttf?#iefix) format('embedded-opentype'),
+               url(font/sp_test.ttf) format('woff2'),
+               url(font/sp_test.ttf) format('woff'),
+               url(font/sp_test.ttf) format('truetype');
+        }
 
-    @font-face {
-      font-family: 'sptest';
-      font-style: normal;
-      font-weight: 500;
-      src: url(font/sp_test.ttf);
-      src: url(font/sp_test.ttf?#iefix) format('embedded-opentype'),
-           url(font/sp_test.ttf) format('woff2'),
-           url(font/sp_test.ttf) format('woff'),
-           url(font/sp_test.ttf) format('truetype');
-    }
-
-    @font-face {
-      font-family: 'sptest_otf';
-      font-style: normal;
-      font-weight: 500;
-      src: url(font/sp_test.otf);
-      src: url(font/sp_test.otf?#iefix) format('embedded-opentype'),
-           url(font/sp_test.otf) format('woff2'),
-           url(font/sp_test.otf) format('woff'),
-           url(font/sp_test.otf) format('truetype');
-    }
-
+        @font-face {
+          font-family: 'sptest_otf';
+          font-style: normal;
+          font-weight: 500;
+          src: url(font/sp_test.otf);
+          src: url(font/sp_test.otf?#iefix) format('embedded-opentype'),
+               url(font/sp_test.otf) format('woff2'),
+               url(font/sp_test.otf) format('woff'),
+               url(font/sp_test.otf) format('truetype');
+        }
+    */
     /* 1 */
     @font-face {
       font-family: 'kazesawa_light';
@@ -901,70 +906,16 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
             return canuesiframe;
         }
 
-        function uesLightbox(a_tag){
-            //https 配合好允許的才建立燈箱機關
-            if (https_way(a_tag.href)) {
-                //http://www.w3schools.com/jsref/met_element_setattribute.asp
-                a_tag.setAttribute('class', 'googleiframe');
-                a_tag.setAttribute('data-fancybox-type', 'iframe');
-                //a_tag.setAttribute('title', a_tag.href);
-                a_tag.setAttribute('title', a_tag.text);
-            }
-
-            // $(function(){
-            //     // 判斷連結的內容，並依內容在連結後加上相對應的圖片
-            //     $('a[href$=".jpg"]').attr('rel', 'fancybox-thumb');
-            //     $('a[href$=".jpg"]').attr('class', 'fancybox-thumb');
-            //     $('a[href$=".jpg"]').attr('data-fancybox-type', 'image');
-            // });
-            //class="googleiframe" 跟 data-fancybox-type="iframe" title 
-
-            //取得附檔名
-            //http://pattyshih66.pixnet.net/blog/post/151955062-%E2%92%BF-%E4%BD%BF%E7%94%A8javascript%E8%AA%9E%E6%B3%95%E5%8F%96%E5%BE%97%E6%AA%94%E6%A1%88%E5%89%AF%E6%AA%94%E5%90%8D
-            //[\[jQ\]幫外部連結加上自訂的圖示 | 男丁格爾's 脫殼玩](http://abgne.tw/?p=3)
-            var ext = a_tag.href.substr(a_tag.href.lastIndexOf('.') + 1, a_tag.href.length);
-            //if ((ext == 'jpg') || (ext == 'JPG')){
-            //match 到的話會是字串，字串在 if = true；沒有 match 到的話 會是 null，在 if 裡會 = false
-            if (ext.match(/.*jpg$/i)!=null){
-                // console.log(ext + ' = jpg');
-                a_tag.setAttribute('class', 'fancybox-thumb');
-                if(a_tag.getAttribute('rel')!='no'){                  //這是後來加的，有些圖片也用燈箱但是不想秀，就可以這樣。
-                  a_tag.setAttribute('rel', 'fancybox-thumb');
-                }
-                a_tag.setAttribute('data-fancybox-type', 'image');
-            }
-            if (ext.match(/.*gif$/i)!=null){
-                // console.log(ext + ' = jpg');
-                a_tag.setAttribute('class', 'fancybox-thumb');
-                if(a_tag.getAttribute('rel')!='no'){
-                  a_tag.setAttribute('rel', 'fancybox-thumb');
-                }
-                a_tag.setAttribute('data-fancybox-type', 'image');
-            }
-            if (ext.match(/.*png$/i)!=null){
-                // console.log(ext + ' = jpg');
-                a_tag.setAttribute('class', 'fancybox-thumb');
-                if(a_tag.getAttribute('rel')!='no'){
-                  a_tag.setAttribute('rel', 'fancybox-thumb');
-                }
-                a_tag.setAttribute('data-fancybox-type', 'image');
-            }
-            if (ext.match(/.*svg$/i)!=null){
-                // console.log(ext + ' = jpg');
-                a_tag.setAttribute('class', 'fancybox-thumb');
-                if(a_tag.getAttribute('rel')!='no'){
-                  a_tag.setAttribute('rel', 'fancybox-thumb');
-                }
-                a_tag.setAttribute('data-fancybox-type', 'image');
-            }
-        }
-
         //2016.10.19+
         function md_file_show(md_name = '$2',target_id){
+            //2016.12.18+
+            if(document.getElementById(target_id)==null){
+                return false;
+            }
             //var this_md = location.href.replace(/(.*)#!(.*)/,'$1').replace('index.html','')  + location.href.replace(/(.*)#!(.*)/,'$2');
             var this_md = location.href.replace(/(.*)#!(.*)/,'$1').replace('index.html','')  + location.href.replace(/(.*)#!(.*)/,md_name);
             //var this_md = location.href.replace(/(.*)#!(.*)/,md_name);
-            if(document.getElementById(target_id).title == '#'){
+            if (document.getElementById(target_id).title == '#')  {
                 document.getElementById(target_id).title = this_md;
                 document.getElementById(target_id).href = this_md;
                 //document.getElementById(target_id).download = md_name;
@@ -974,16 +925,18 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
         }
 
         function parseLink(){
-            //2016.12.07+ 關閉過期字體 
-            font_close();
             //2016.12.07+ debug width
             debug_width();
-            //2016.11.27+ high code
-            change_tag_class('pre','prettyprint');
-            plus_js("https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js","plusjs_"+Math.floor(1E9*Math.random()));
-            //https://jmblog.github.io/color-themes-for-google-code-prettify/
-            //+1
-            css_add_inline(".prettyprint{padding: 20px !important;margin-bottom: 20px !important;border: 1px solid transparent !important;border-radius: 6px !important;text-shadow: 0 0 0.001em !important;font-size:14px !important;background:#000 !important;font-family:Menlo,Bitstream Vera Sans Mono,DejaVu Sans Mono,Monaco,Consolas,monospace !important;border:0!important}.pln{color:#fff !important}ol.linenums{margin-top:0 !important;margin-bottom:0 !important;color:#666 !important}li.L0,li.L1,li.L2,li.L3,li.L4,li.L5,li.L6,li.L7,li.L8,li.L9{padding-left:1em !important;background-color:#000 !important;list-style-type:decimal !important}@media screen{.str{color:#6f0 !important}.kwd{color:#f60 !important}.com{color:#4D5382 !important}.typ{color:#458 !important}.lit{color:#00C3FF !important}.pun{color:#fff !important}.opn{color:#fff !important}.clo{color:#fff !important}.tag{color:orange !important}.atn{color:#9c9 !important}.atv{color:#6f0 !important}.dec{color:#fff !important}.var{color:#fff !important}.fun{color:#fc0 !important}}");
+
+            //code 高亮
+              //2016.11.27+ high code
+              change_tag_class('pre','prettyprint');
+              plus_js("https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js","plusjs_"+Math.floor(1E9*Math.random()));
+              //https://jmblog.github.io/color-themes-for-google-code-prettify/
+              //+1
+              css_add_inline(".prettyprint{padding: 20px !important;margin-bottom: 20px !important;border: 1px solid transparent !important;border-radius: 6px !important;text-shadow: 0 0 0.001em !important;font-size:14px !important;background:#000 !important;font-family:Menlo,Bitstream Vera Sans Mono,DejaVu Sans Mono,Monaco,Consolas,monospace !important;border:0!important}.pln{color:#fff !important}ol.linenums{margin-top:0 !important;margin-bottom:0 !important;color:#666 !important}li.L0,li.L1,li.L2,li.L3,li.L4,li.L5,li.L6,li.L7,li.L8,li.L9{padding-left:1em !important;background-color:#000 !important;list-style-type:decimal !important}@media screen{.str{color:#6f0 !important}.kwd{color:#f60 !important}.com{color:#4D5382 !important}.typ{color:#458 !important}.lit{color:#00C3FF !important}.pun{color:#fff !important}.opn{color:#fff !important}.clo{color:#fff !important}.tag{color:orange !important}.atn{color:#9c9 !important}.atv{color:#6f0 !important}.dec{color:#fff !important}.var{color:#fff !important}.fun{color:#fc0 !important}}");
+
+
             //仿 monokai
             //css_add_inline(".prettyprint{padding: 20px !important;margin-bottom: 20px !important;border: 1px solid transparent !important;border-radius: 6px !important;text-shadow: 0 0 0.001em !important;font-size:14px !important;background:#000 !important;font-family:Menlo,Bitstream Vera Sans Mono,DejaVu Sans Mono,Monaco,Consolas,monospace !important;border:0!important}.pln{color:#fff !important}ol.linenums{margin-top:0 !important;margin-bottom:0 !important;color:#666 !important}li.L0,li.L1,li.L2,li.L3,li.L4,li.L5,li.L6,li.L7,li.L8,li.L9{padding-left:1em !important;background-color:#000 !important;list-style-type:decimal !important}@media screen{.str{color:#e6db74 !important}.kwd{color:#00C3FF !important}.com{color:#4D5382 !important}.typ{color:#458 !important}.lit{color:#ae81ff !important}.pun{color:#fff !important}.opn{color:#fff !important}.clo{color:#fff !important}.tag{color:#f92672 !important}.atn{color:#a6e22e !important}.atv{color:#e6db74 !important}.dec{color:#fff !important}.var{color:#fff !important}.fun{color:#fc0 !important}}");
             //https://jmblog.github.io/color-themes-for-google-code-prettify/
@@ -994,12 +947,19 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
             md_file_show('navigation.md','md_file_navigation');
             md_file_show('config.json','md_file_config');
             //2016.10.20+
-            if(!is_mobile()){
-                //2016.12.12 更新電腦版也可以轉發
-                //$(document.getElementById('line')).hide();
-            }else{
-                //$(document.getElementById('line')).show();
+            // if(!is_mobile()){
+            //     //2016.12.12 更新電腦版也可以轉發
+            //     //$(document.getElementById('line')).hide();
+            // }else{
+            //     //$(document.getElementById('line')).show();
+            // }
+
+            // 2016.10.30+ 控制廣告提示
+            //如果是行動裝置或者不是忍者網域，就不要顯示廣告提示
+            if( (is_mobile()) || (!(document.domain.indexOf('landerso.at-ninja.jp')!=-1))  ){
+                $(document.getElementById('ninja')).hide();
             }
+
             if(/http+:\/\/landerso.at-ninja.jp\//.test(document.location.href)){
                 $(document.getElementById('close_ni')).show();
             }else{
@@ -1011,113 +971,117 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
                 console.log('手機板才載入 addthis 方便分享按鈕。');
             }
             */
-            //2016.10.21+ 根據佈景主題改變網址列顏色
-            //<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.min.css">
-            css_add_inline(".img-thumbnail {border: 0px solid !important;background-color:rgba(97%, 97%, 97%, 0.0) !important;};");
-            if(bootstrap_theme()!=''){
-                css_add_inline(".dropdown {text-shadow: 0 0 0.001em !important;}");
-                switch(bootstrap_theme()) {
-                    case 'bootstrap':
-                        //changebackcolor('https://coolors.co/ffffff-fcfcfc-f9f9f9-fcfcfc-ffffff');
-                        break;
-                    case 'amelia':
-                        css_add_inline("li.dropdown-header{color:#7a8288 !important;};");
-                        css_add_inline("hr{border: 1px solid rgba(97%, 97%, 97%, 0.1) !important;};");
-                        css_add_inline(".page-header {border-bottom: 1px solid rgba(97%, 97%, 97%, 0.1) !important; };");
-                        css_add_inline(".dropdown {text-shadow: 0 0 0.001em !important;}");
-                        set_theme_color('#8e1821');
-                        //changebackcolor('https://coolors.co/108a93-0e777f-0c696f-0f868e-108a93');
-                        changebackcolor('https://coolors.co/108a93-a50d59-0c696f-510d0a-108a93');
-                        //changebackcolor('https://coolors.co/app/042f8a-0cabf8-d6023a-f27900-ffbb00');
-                        break;
-                    case 'cerulean':
-                        set_theme_color('#1993d9');
-                        css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
-                        changebackcolor('https://coolors.co/ffffff-f1f8fc-d1e9f7-e2f2fc-ffffff');
-                        break; 
-                    case 'cosmo':
-                        set_theme_color('#111');
-                        changebackcolor('https://coolors.co/ffffff-d3f57d-f4f07c-dbf694-ffffff');
-                        break;
-                    case 'cyborg':
-                        set_theme_color('#000');
-                        css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
-                        changebackcolor('https://coolors.co/060606-062535-062637-041a26-060606');
-                        break;
-                    case 'flatly':
-                        set_theme_color('#1f2c39');
-                        css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
-                        changebackcolor('https://coolors.co/ffffff-dcf9ef-f7f3cf-d7fff1-ffffff');
-                        //changebackcolor('https://coolors.co/ffffff-d0f7e9-f7f3cf-c9ffec-ffffff');
-                        //changebackcolor('https://coolors.co/ffffff-d0f7e9-f7f3cf-b9f993-ffffff');
-                        //changebackcolor('https://coolors.co/78fbc7-b1dbf7-a9f3e5-f9bc59-d8ffed');
-                        break;
-                    case 'journal':
-                        set_theme_color('#ededed');
-                        css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
-                        changebackcolor('https://coolors.co/ffffff-ffdea5-f0ba97-ffd98e-ffffff');
-                        break;
-                    case 'readable':
-                        set_theme_color('#e7e7e7');
-                        css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
-                        changebackcolor('https://coolors.co/f9f9f9-cfe1f1-bbd5ef-c8ddef-f9f9f9');
-                        break; 
-                    case 'simplex':
-                        set_theme_color('#ededed');
-                        css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
-                        changebackcolor('https://coolors.co/ffffff-ffdec7-ffc59d-ffacbc-ffffff'); 
-                        //changebackcolor('https://coolors.co/f7f7f7-d0f7e9-f7f3cf-dbf3f9-f7f7f7'); //1
-                        break; 
-                    case 'slate':
-                        set_theme_color('#2a2d31');
-                        //changebackcolor('https://coolors.co/272b30-262a30-202328-24282d-272b30');
-                        changebackcolor('https://coolors.co/272b30-0a1421-050b33-1e1f28-272b30');
-                        break;
-                    case 'spacelab':
-                        set_theme_color('#dcdcdc');
-                        css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
-                        changebackcolor('https://coolors.co/ffffff-f5f5f5-eaf5ff-f8f7ff-ffffff');
-                        //changebackcolor('https://coolors.co/ffffff-c0dfe3-b3ede0-e5f6f4-ffffff'); //2
-                        break;
-                    case 'united':
-                        set_theme_color('#bc3d11');
-                        css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
-                        break;
-                    case 'yeti':
-                        set_theme_color('#222');
-                        css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
-                        break;
-                    case 'darkly':
-                        set_theme_color('#375a7f');
-                        //changebackcolor('https://coolors.co/222222-000533-01143a-17002b-222222'); //暫停 2016.12.12
-                        break;
-                    case 'lumen':
-                        set_theme_color('#f8f8f8');
-                        css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
-                        break;
-                    case 'Paper':
-                        set_theme_color('#FFF');
-                        css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
-                        break;
-                    case 'sandstone':
-                        set_theme_color('#3e3f3a');
-                        css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
-                        break;
-                    case 'superhero':
-                        set_theme_color('#2b3e50');
-                        changebackcolor('https://coolors.co/2b3e50-192a3a-142536-172838-2b3e50');
-                        //changebackcolor('https://coolors.co/2b3e50-22394f-1e3a54-1f364c-2b3e50'); //1
-                        //changebackcolor('https://coolors.co/2b3e50-192a3a-142536-111e2a-2b3e50');
-                        break;
-                    default:
-                        set_theme_color('#e6e6e6');
-                        changebackcolor('https://coolors.co/ffffff-fcfcfc-f9f9f9-fcfcfc-ffffff');
-                        //changebackcolor('https://coolors.co/3688c3-3474b2-5d53b8-3b76b0-3688c3');  //始
-                        break;
+            function css_set_once(){
+                //2016.10.21+ 根據佈景主題改變網址列顏色
+                //<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.min.css">
+                css_add_inline(".img-thumbnail {border: 0px solid !important;background-color:rgba(97%, 97%, 97%, 0.0) !important;};");
+                if(bootstrap_theme()!=''){
+                    css_add_inline(".dropdown {text-shadow: 0 0 0.001em !important;}");
+                    switch(bootstrap_theme()) {
+                        case 'bootstrap':
+                            //changebackcolor('https://coolors.co/ffffff-fcfcfc-f9f9f9-fcfcfc-ffffff');
+                            break;
+                        case 'amelia':
+                            css_add_inline("li.dropdown-header{color:#7a8288 !important;};");
+                            css_add_inline("hr{border: 1px solid rgba(97%, 97%, 97%, 0.1) !important;};");
+                            css_add_inline(".page-header {border-bottom: 1px solid rgba(97%, 97%, 97%, 0.1) !important; };");
+                            css_add_inline(".dropdown {text-shadow: 0 0 0.001em !important;}");
+                            set_theme_color('#8e1821');
+                            //changebackcolor('https://coolors.co/108a93-0e777f-0c696f-0f868e-108a93');
+                            changebackcolor('https://coolors.co/108a93-a50d59-0c696f-510d0a-108a93');
+                            //changebackcolor('https://coolors.co/app/042f8a-0cabf8-d6023a-f27900-ffbb00');
+                            break;
+                        case 'cerulean':
+                            set_theme_color('#1993d9');
+                            css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
+                            changebackcolor('https://coolors.co/ffffff-f1f8fc-d1e9f7-e2f2fc-ffffff');
+                            break; 
+                        case 'cosmo':
+                            set_theme_color('#111');
+                            changebackcolor('https://coolors.co/ffffff-d3f57d-f4f07c-dbf694-ffffff');
+                            break;
+                        case 'cyborg':
+                            set_theme_color('#000');
+                            css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
+                            changebackcolor('https://coolors.co/060606-062535-062637-041a26-060606');
+                            break;
+                        case 'flatly':
+                            set_theme_color('#1f2c39');
+                            css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
+                            changebackcolor('https://coolors.co/ffffff-dcf9ef-f7f3cf-d7fff1-ffffff');
+                            //changebackcolor('https://coolors.co/ffffff-d0f7e9-f7f3cf-c9ffec-ffffff');
+                            //changebackcolor('https://coolors.co/ffffff-d0f7e9-f7f3cf-b9f993-ffffff');
+                            //changebackcolor('https://coolors.co/78fbc7-b1dbf7-a9f3e5-f9bc59-d8ffed');
+                            break;
+                        case 'journal':
+                            set_theme_color('#ededed');
+                            css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
+                            changebackcolor('https://coolors.co/ffffff-ffdea5-f0ba97-ffd98e-ffffff');
+                            break;
+                        case 'readable':
+                            set_theme_color('#e7e7e7');
+                            css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
+                            changebackcolor('https://coolors.co/f9f9f9-cfe1f1-bbd5ef-c8ddef-f9f9f9');
+                            break; 
+                        case 'simplex':
+                            set_theme_color('#ededed');
+                            css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
+                            changebackcolor('https://coolors.co/ffffff-ffdec7-ffc59d-ffacbc-ffffff'); 
+                            //changebackcolor('https://coolors.co/f7f7f7-d0f7e9-f7f3cf-dbf3f9-f7f7f7'); //1
+                            break; 
+                        case 'slate':
+                            set_theme_color('#2a2d31');
+                            //changebackcolor('https://coolors.co/272b30-262a30-202328-24282d-272b30');
+                            changebackcolor('https://coolors.co/272b30-0a1421-050b33-1e1f28-272b30');
+                            break;
+                        case 'spacelab':
+                            set_theme_color('#dcdcdc');
+                            css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
+                            changebackcolor('https://coolors.co/ffffff-f5f5f5-eaf5ff-f8f7ff-ffffff');
+                            //changebackcolor('https://coolors.co/ffffff-c0dfe3-b3ede0-e5f6f4-ffffff'); //2
+                            break;
+                        case 'united':
+                            set_theme_color('#bc3d11');
+                            css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
+                            break;
+                        case 'yeti':
+                            set_theme_color('#222');
+                            css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
+                            break;
+                        case 'darkly':
+                            set_theme_color('#375a7f');
+                            //changebackcolor('https://coolors.co/222222-000533-01143a-17002b-222222'); //暫停 2016.12.12
+                            break;
+                        case 'lumen':
+                            set_theme_color('#f8f8f8');
+                            css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
+                            break;
+                        case 'Paper':
+                            set_theme_color('#FFF');
+                            css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
+                            break;
+                        case 'sandstone':
+                            set_theme_color('#3e3f3a');
+                            css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
+                            break;
+                        case 'superhero':
+                            set_theme_color('#2b3e50');
+                            changebackcolor('https://coolors.co/2b3e50-192a3a-142536-172838-2b3e50');
+                            //changebackcolor('https://coolors.co/2b3e50-22394f-1e3a54-1f364c-2b3e50'); //1
+                            //changebackcolor('https://coolors.co/2b3e50-192a3a-142536-111e2a-2b3e50');
+                            break;
+                        default:
+                            set_theme_color('#e6e6e6');
+                            changebackcolor('https://coolors.co/ffffff-fcfcfc-f9f9f9-fcfcfc-ffffff');
+                            //changebackcolor('https://coolors.co/3688c3-3474b2-5d53b8-3b76b0-3688c3');  //始
+                            break;
+                    }
+                }else{
+                  css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
                 }
-            }else{
-              css_add_inline("#md-content{text-shadow: 0 0 0.001em !important;}");
             }
+            css_set_once();
+
             //2016.10.22+ font
             // var myfont = '\'微軟正黑體\',\'Microsoft JhengHei\',\'sans\-serif\'';//'\"メイリオ\", Meiryo, \"ＭＳ Ｐゴシック\", \"MS PGothic\", sans-serif';
             // //web font test
@@ -1148,87 +1112,151 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
             // //document.getElementsByTagName('li')[0].style.fontFamily = myfont;
             // //應該改成強制寫入 CSS 那種
 
-            //2016.10.30 更改成有記憶的
-            //沒記憶可讀
-            if ((localStorage['font'] == '') || (localStorage['font'] === undefined) ) {
-                //2016.10.27+ function 化 font_set
-                font_set();
-                //console.log('font 原參數');
-                //font_set('\'cwTeXHei\',arial');
-            }else{
-                change_font = localStorage['font']; //先讀記憶
-                font_set(change_font);
-                //console.log('font 客參數：' + change_font);
-            }
-            //tag_font_set('code','\'微軟正黑體\',\'Microsoft JhengHei\',\'sans\-serif\'');
+            //font
+              //2016.10.30 更改成有記憶的 FONT
+              //沒記憶可讀
+              if ((localStorage['font'] == '') || (localStorage['font'] === undefined) ) {
+                  //2016.10.27+ function 化 font_set
+                  font_set();
+                  //console.log('font 原參數');
+                  //font_set('\'cwTeXHei\',arial');
+              }else{
+                  change_font = localStorage['font']; //先讀記憶
+                  font_set(change_font);
+                  //console.log('font 客參數：' + change_font);
+              }
+              //tag_font_set('code','\'微軟正黑體\',\'Microsoft JhengHei\',\'sans\-serif\'');
 
-            // 2016.10.30+ 控制廣告提示
-            //如果是行動裝置或者不是忍者網域，就不要顯示廣告提示
-            if( (is_mobile()) || (!(document.domain.indexOf('landerso.at-ninja.jp')!=-1))  ){
-                $(document.getElementById('ninja')).hide();
-            }
-    
-            var tagA = document.getElementsByTagName('a');
+              //2016.12.07+ 關閉過期字體 
+              font_close();
 
-            isgoogle = new RegExp( "^https?:\/\/.*.googledrive.com.*\/host\/(.*)\/(#.*)$", "i");
-            var thispage_googleid = location.href.replace(isgoogle,'$1');
-            
-            re = new RegExp( "^(https?:\/\/" + document.domain + ")|(javascript:)", "gim");
-            
-            for( var i=0; i < tagA.length; i++ ){
-                //不是本網域或指令的LINK，就要+開新窗。
-                if( !tagA[i].href.match( re ) ){
-                    //本來沒有開新窗屬性的，就給他+。已經有了就不用了。
-                    //增加過濾單機路徑
-                    if ((tagA[i].target != "_blank") && (tagA[i].href.indexOf('file:\/\/\/')==-1))  {
-                        //thispage_googleid 如果不是 google，就會保留完整網址。
-                        //if(thispage_googleid==location.href){
-                        //    console.log('這不是北七複雜的 Google Drive');
-                        //}
-                        //console.log('thispage_googleid = ' + thispage_googleid);
-                        if(!(thispage_googleid==location.href)){
-                            //有取得 google drive id
-                            if(tagA[i].href.indexOf(thispage_googleid)==-1){
-                                //上層 if 判斷是 google，這層判斷 google id 不同就要當外站處理，另開視窗。
-                                tagA[i].target = "_blank";
-                                uesLightbox(tagA[i]);
-                                console.log('[google] = ' + tagA[i]);   
-                            }
-                        }else{
-                            tagA[i].target = "_blank";
-                            uesLightbox(tagA[i]);
-                            console.log(tagA[i]);
+            function a_tag_fancybox_maker(){
+
+                function uesLightbox(a_tag){
+                    //https 配合好允許的才建立燈箱機關
+                    if (https_way(a_tag.href)) {
+                        //http://www.w3schools.com/jsref/met_element_setattribute.asp
+                        a_tag.setAttribute('class', 'googleiframe');
+                        a_tag.setAttribute('data-fancybox-type', 'iframe');
+                        //a_tag.setAttribute('title', a_tag.href);
+                        a_tag.setAttribute('title', a_tag.text);
+                    }
+
+                    // $(function(){
+                    //     // 判斷連結的內容，並依內容在連結後加上相對應的圖片
+                    //     $('a[href$=".jpg"]').attr('rel', 'fancybox-thumb');
+                    //     $('a[href$=".jpg"]').attr('class', 'fancybox-thumb');
+                    //     $('a[href$=".jpg"]').attr('data-fancybox-type', 'image');
+                    // });
+                    //class="googleiframe" 跟 data-fancybox-type="iframe" title 
+
+                    //取得附檔名
+                    //http://pattyshih66.pixnet.net/blog/post/151955062-%E2%92%BF-%E4%BD%BF%E7%94%A8javascript%E8%AA%9E%E6%B3%95%E5%8F%96%E5%BE%97%E6%AA%94%E6%A1%88%E5%89%AF%E6%AA%94%E5%90%8D
+                    //[\[jQ\]幫外部連結加上自訂的圖示 | 男丁格爾's 脫殼玩](http://abgne.tw/?p=3)
+                    var ext = a_tag.href.substr(a_tag.href.lastIndexOf('.') + 1, a_tag.href.length);
+                    //if ((ext == 'jpg') || (ext == 'JPG')){
+                    //match 到的話會是字串，字串在 if = true；沒有 match 到的話 會是 null，在 if 裡會 = false
+                    if (ext.match(/.*jpg$/i)!=null){
+                        // console.log(ext + ' = jpg');
+                        a_tag.setAttribute('class', 'fancybox-thumb');
+                        if(a_tag.getAttribute('rel')!='no'){                  //這是後來加的，有些圖片也用燈箱但是不想秀，就可以這樣。
+                          a_tag.setAttribute('rel', 'fancybox-thumb');
                         }
+                        a_tag.setAttribute('data-fancybox-type', 'image');
+                    }
+                    if (ext.match(/.*gif$/i)!=null){
+                        // console.log(ext + ' = jpg');
+                        a_tag.setAttribute('class', 'fancybox-thumb');
+                        if(a_tag.getAttribute('rel')!='no'){
+                          a_tag.setAttribute('rel', 'fancybox-thumb');
+                        }
+                        a_tag.setAttribute('data-fancybox-type', 'image');
+                    }
+                    if (ext.match(/.*png$/i)!=null){
+                        // console.log(ext + ' = jpg');
+                        a_tag.setAttribute('class', 'fancybox-thumb');
+                        if(a_tag.getAttribute('rel')!='no'){
+                          a_tag.setAttribute('rel', 'fancybox-thumb');
+                        }
+                        a_tag.setAttribute('data-fancybox-type', 'image');
+                    }
+                    if (ext.match(/.*svg$/i)!=null){
+                        // console.log(ext + ' = jpg');
+                        a_tag.setAttribute('class', 'fancybox-thumb');
+                        if(a_tag.getAttribute('rel')!='no'){
+                          a_tag.setAttribute('rel', 'fancybox-thumb');
+                        }
+                        a_tag.setAttribute('data-fancybox-type', 'image');
                     }
                 }
-                googledrive_url(tagA[i]);  //只是利用同一個迴圈做事
-                //單機，條件1代表正在單機，條件2代表現在這個URL不是本機路徑，就可以+新窗。
-                if (((document.domain=="") && (tagA[i].href.indexOf('file:\/\/\/')==-1)) && (tagA[i].target != "_blank") ) {
-                    tagA[i].target = "_blank";
-                    uesLightbox(tagA[i]);
-                    console.log('單機 = ' + tagA[i]); 
-                }
-                //如果是 https 端裡面要塞 http 會被拒絕，所以全都當成 https 去連線
-                // if(!(tagA[i].href.match(/^https.*/i))){
-                //     tagA[idocument.domain tagA[i].href.replace(/^http\:\/\//,'https\:\/\/')
-                //     console.log('無差別改寫成 https: = ' + tagA[i].href);
-                // }
 
-                //2016.11.27+ 檢查有沒有設置錯誤的 JavaScript Command url
-                //這裡是整個 atag 的迴圈，所以放進來直接利用
-                //reset_javascript_command_url(tagA[i]);
+                function googledrive_url(link_url_obj){
+                    var taga_before = link_url_obj.href;
+                    link_url_obj.href = link_url_obj.href.replace(/^https?:\/\/.*.googledrive.com.*\/host\/(.*\/.*$)/i,'https://googledrive.com/host/'+'$1');
+                    //location.href.replace(/(^https?:\/\/.*.googledrive.com.*\/host\/)(.*\/#.*)$/i,'https://googledrive.com/host/'+'$2');
+                    //取得最漂亮的 google drive link（不使用組合，玩取代才能無差別），如果不是的 URL 也會保持原樣。
+                    //下面就是判斷是不是保持原樣。有被改過的表示就是 google drive host。
+                    if ( (taga_before != link_url_obj.href) && (taga_before != '') ){
+                        console.log('Google drive change = ' + taga_before + '  to  ' + link_url_obj);
+                    }        
+                }
+
+                var tagA = document.getElementsByTagName('a');
+
+                isgoogle = new RegExp( "^https?:\/\/.*.googledrive.com.*\/host\/(.*)\/(#.*)$", "i");
+                var thispage_googleid = location.href.replace(isgoogle,'$1');
+                
+                re = new RegExp( "^(https?:\/\/" + document.domain + ")|(javascript:)", "gim");
+                
+                for( var i=0; i < tagA.length; i++ ){
+                    //不是本網域或指令的LINK，就要+開新窗。
+                    if( !tagA[i].href.match( re ) ){
+                        //本來沒有開新窗屬性的，就給他+。已經有了就不用了。
+                        //增加過濾單機路徑
+                        if ((tagA[i].target != "_blank") && (tagA[i].href.indexOf('file:\/\/\/')==-1))  {
+                            //thispage_googleid 如果不是 google，就會保留完整網址。
+                            //if(thispage_googleid==location.href){
+                            //    console.log('這不是北七複雜的 Google Drive');
+                            //}
+                            //console.log('thispage_googleid = ' + thispage_googleid);
+                            if(!(thispage_googleid==location.href)){
+                                //有取得 google drive id
+                                if(tagA[i].href.indexOf(thispage_googleid)==-1){
+                                    //上層 if 判斷是 google，這層判斷 google id 不同就要當外站處理，另開視窗。
+                                    tagA[i].target = "_blank";
+                                    uesLightbox(tagA[i]);
+                                    console.info('[google] = ' + tagA[i]); //<a> 觀察
+                                }
+                            }else{
+                                tagA[i].target = "_blank";
+                                uesLightbox(tagA[i]);
+                                //console.info(tagA[i]); //<a> 觀察
+                            }
+                        }
+                    }
+                    googledrive_url(tagA[i]);  //只是利用同一個迴圈做事
+                    //單機，條件1代表正在單機，條件2代表現在這個URL不是本機路徑，就可以+新窗。
+                    if (((document.domain=="") && (tagA[i].href.indexOf('file:\/\/\/')==-1)) && (tagA[i].target != "_blank") ) {
+                        tagA[i].target = "_blank";
+                        uesLightbox(tagA[i]);
+                        console.info('連結目標 = 單機 = ' + tagA[i]); //<a> 觀察
+                    }
+                    //如果是 https 端裡面要塞 http 會被拒絕，所以全都當成 https 去連線
+                    // if(!(tagA[i].href.match(/^https.*/i))){
+                    //     tagA[idocument.domain tagA[i].href.replace(/^http\:\/\//,'https\:\/\/')
+                    //     console.log('無差別改寫成 https: = ' + tagA[i].href);
+                    // }
+
+                    //2016.11.27+ 檢查有沒有設置錯誤的 JavaScript Command url
+                    //這裡是整個 atag 的迴圈，所以放進來直接利用
+                    //reset_javascript_command_url(tagA[i]);
+                }
             }
+            a_tag_fancybox_maker();
+            //常態網頁載入觸發點結束
         }
-        function googledrive_url(link_url_array){
-            var taga_before = link_url_array.href;
-            link_url_array.href = link_url_array.href.replace(/^https?:\/\/.*.googledrive.com.*\/host\/(.*\/.*$)/i,'https://googledrive.com/host/'+'$1');
-            //location.href.replace(/(^https?:\/\/.*.googledrive.com.*\/host\/)(.*\/#.*)$/i,'https://googledrive.com/host/'+'$2');
-            //取得最漂亮的 google drive link（不使用組合，玩取代才能無差別），如果不是的 URL 也會保持原樣。
-            //下面就是判斷是不是保持原樣。有被改過的表示就是 google drive host。
-            if ( (taga_before != link_url_array.href) && (taga_before != '') ){
-                console.log('Google drive change = ' + taga_before + '  to  ' + link_url_array);
-            }        
-        }
+
+
 
         //2016.11.27+ 修正網址有深層資料夾中的 javascript: 連結被弄成 Domain 型網頁連結
         function reset_javascript_command_url(tagA){
@@ -1268,12 +1296,11 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
     <!-- http://blog.xuite.net/vexed/tech/61308318-script+tag+%E5%B1%AC%E6%80%A7+async+defer+%E5%B7%AE%E5%88%A5 -->
 
     <script type="text/javascript">
+      //燈箱功能載入
         $(document).ready(function() {
             $(".fancybox").fancybox();
         });
-    </script>
-
-    <script type="text/javascript">
+      //燈箱 一般自動化框架模式參數設定
         // http://fancyapps.com/fancybox/#examples
         $(document).ready(function() {
             $(".googleiframe").fancybox({
@@ -1376,7 +1403,7 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
                 }
             });
         });
-
+      //燈箱 一般自動化圖片就是相簿設定（rel=no 可以避免掉）
         $(document).ready(function() {
             $(".fancybox-thumb").fancybox({
                 maxWidth    : 9999,
@@ -1416,12 +1443,14 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
         });
     </script>
 <!-- Lightbox fancybox 燈箱結束-->
+
 <!-- 全螢幕功能_開始 -->
     <!-- https://github.com/sindresorhus/screenfull.js -->
     <!-- <script async type="text/javascript" src="screenfull.js"></script> -->
     <script defer type="text/javascript" src="screenfull.js"></script>
     <script type="text/javascript">
         function max_full(target_obj='',trigger_item=''){
+            //參數做處理達成兩用 function，不是物件的就看是不是字串。是字串，就用 by id 抓物件。 2016.12.16 改複雜版，原為最核心的 trigger_item.addEventListener('click', () => { 而已
             if ( (target_obj!='') && (trigger_item!='')){
               target_obj = ( (typeof(target_obj) == "object")  ?   target_obj   :  ( (typeof(target_obj) == "string") ? document.getElementById(target_obj) : ''  )  );
               trigger_item = ( (typeof(trigger_item) == "object")  ?   trigger_item   :  ( (typeof(trigger_item) == "string") ? document.getElementById(trigger_item) : ''  )  );
@@ -1442,33 +1471,16 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
     </script>
 <!-- 全螢幕功能_結束 -->
 
-<!-- Web font_開始 -->
-    <!-- http://ifontcloud.com/index/fontKnowledge_9.jsp -->
-<!--     <script type='text/javascript' src='//font.arphic.com/FontSubsetOutput/1470551355753/EEC76680DA382707F92AE6B91449CB67/1470551355753.JS?2011523677'></script>
-    <style type="text/css">
-        .arwf-loading body { /*Web Font正在載入中，不顯示文字*/
-              opacity: 0;
-              visibility: hidden;
-        }
-        .arwf-active body { /*Web Font處理成功，直接顯示文字*/
-              opacity: 1;
-              visibility: visible;
-        }
-        .arwf-inactive body {/*如果Web Font處理失敗，直接顯示文字*/
-              opacity: 1;
-              visibility: visible;
-        }
-    </style> -->
-<!-- Web font_結束 -->
-
     <!-- Share 開始 -->
         <!-- <script type='text/javascript' data-cfasync='false' src='//dsms0mj1bbhn4.cloudfront.net/assets/pub/shareaholic.js' data-shr-siteid='4d41c958ee8d9c1447085e3971ae296c' async='async'></script> -->
         <!-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-580633de792d2c59"></script>  -->
     <!-- Share 結束 -->
+
 <!-- 2016.10.20 增加判斷瀏覽者裝置 function 開始 -->
     <script type="text/javascript">
-        //mobile
-        // http://blog.webgolds.com/view/160
+
+      //mobile
+      // http://blog.webgolds.com/view/160
         function is_mobile(){
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
@@ -1628,49 +1640,18 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
 
             if( (myfont!=localStorage['font']) || (parseInt(localStorage['jsgendfo_timer'])<3) ) {
                 jsgendfo_timer();
-                jsgendfo(); //華康官方的更新字體 function，執行過度接近或過多次容易記憶體吃太多。
-                _jf.flush(); //Just Font
+                try {
+                  jsgendfo(); //華康官方的更新字體 function，執行過度接近或過多次容易記憶體吃太多。
+                  _jf.flush(); //Just Font                            
+                }catch (e) {
+                    console.info(e);
+                }
                 //console.log( 'jsgendfo = ' + localStorage['jsgendfo_timer']);
             }
         }
 
-        //未完成區域-------自製代碼抽換
-        function wiki_link(target_tag){
-            if(document.getElementsByTagName(target_tag)[0] !== undefined){
-                for (var i = 0; i < document.getElementsByTagName(target_tag).length; i++) {
-                    if(/\[\[(.*)\]\]/gim.test(document.getElementsByTagName(target_tag)[i].innerHTML)){
-                        if(document.getElementsByTagName(target_tag)[i].innerHTML.replace(/\[\[(.*)\]\]|(\<code.*\[\[.*\]\].*\<\/code\>)/gim,'$1')==''){
-                            //\[\[(.*)\]\]|\<code.*\[\[(.*)\]\].*\<\/code\>            $1=='' -> code 內
-                            document.getElementsByTagName(target_tag)[i].innerHTML = document.getElementsByTagName(target_tag)[i].innerHTML.replace(/\[\[(.*)\]\]/gim,'<a href=\"#!$1\">$1<\/a>');
-                            console.log('wiki aru');
-                        }
-                    }else{
-                        console.log('1 if -else');
-                    }
-                }
-            }else{
-                console.log('no momno');
-            }
-        }
 
-        function wiki_link_id(target_id = 'md\-content'){
-            if(document.getElementById(target_id) !== undefined){
-                //for (var i = 0; i < document.getElementsByTagName(target_tag).length; i++) {
-                    if(/\[\[(.*)\]\]/gim.test(document.getElementById(target_id).innerHTML)){
-                        if(document.getElementById(target_id).innerHTML.replace(/\[\[(.*)\]\]|(\<code.*\[\[.*\]\].*\<\/code\>)/gim,'$1')==''){
-                            //\[\[(.*)\]\]|\<code.*\[\[(.*)\]\].*\<\/code\>            $1=='' -> code 內
-                            document.getElementById(target_id).innerHTML = document.getElementById(target_id).innerHTML.replace(/\[\[(.*)\]\]/gim,'<a href=\"#!$1\">$1<\/a>');
-                            console.log('wiki aru');
-                        }
-                    }else{
-                        console.log('1 if -else');
-                    }
-                //}
-            }else{
-                console.log('no momno');
-            }
-        }
-        //未完成區域-------結束
+
         //燈箱驗證用 function，排除事項統一加在這裡。
         function fancybox_check_before(this_mono){
                     //----針對 X-Frame-Options 確定的網域，在這裡作手動排除。
@@ -1769,7 +1750,7 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
           }
         }
 
-        //2016.11.27+ 改變指定標籤的 class
+        //2016.11.27+ 改變 code 高亮相關指定標籤的 class
         function change_tag_class(tag_name,class_name){
             var tagA = document.getElementsByTagName(tag_name);
             for( var i=0; i < tagA.length; i++ ){
@@ -1782,17 +1763,19 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
             }
         }
 
-        //2016.11.10+ 
+        //2016.11.10+ 直接執行 選擇元件中的 value
         function selectchanged(selecter) {
             //var options_max = selecter.length; // selecter.name
             console.log(selecter.options[selecter.selectedIndex].text + ' = ' + selecter.options[selecter.selectedIndex].value);
-            eval(selecter.options[selecter.selectedIndex].value);
+            if(/^javascript\:/gi.test(selecter.options[selecter.selectedIndex].value)){ //2016.12.18+ 判斷是否是 javascript 命令
+              eval(selecter.options[selecter.selectedIndex].value);
+            }
         }
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //2016.11.17+ 新增自動記錄異常情況供事後人工修正
         //2016.11.24+ LINE 通報 (https://notify-bot.line.me/my/)
-        function report_error(this_mono,target_web="JANDI",other_msg=""){
+        function report_error(this_mono,target_web="JANDI",other_msg=""){  //用於收集 跨網域不能載入的框架的網址
 
             //經過 Zapier 再發給 JANDI
             //https://zapier.com/blog/how-use-zapier-webhooks/
@@ -1850,135 +1833,7 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
             }
         }
 
-        function JANDI_json_format(j_body='',j_color='#FAC11B',connectInfoJSON,info_title='',info_description='',info_url='',userinfo_show=1){
-            var arr = {
-              body: [],
-              connectColor:[],
-              connectInfo:[]
-            };
-
-            if(j_body==''){
-                console.log('你沒輸入主要內容 body 為空');
-                return false;
-                //arr.body.push('你沒輸入');
-            }else{
-                if(/^\{.*\}$/gi.test(j_body)||isJson(j_body)){
-                    //console.log(j_body);
-                    console.log('這不用格式化了好嗎 -> 這是手寫 JSON 或 JSON 物件，但你重複在 body 內又塞一個幹嘛...\n只好幫你轉換了，感謝我吧！');
-                    //是物件的話
-                    if(isJson(j_body)){
-                      if((j_body.body!='')||(typeof(j_body.body)!=null)||(typeof(j_body.body)!=undefined)){
-                        j_body = j_body.body;
-                        console.log(j_body);
-                        console.log(typeof(j_body));
-                      }else{
-                        //if(j_body.body==null){
-                          console.log('少年！你錯寫成物件就算了，還沒寫 body 不能通過啦！');
-                          return false;
-                        //}
-                      }
-                    }
-                    //是手寫的 Json 字串的話
-                    if(/^\{.*\}$/gi.test(j_body)){
-                      j_body = j_body.replace(/^\{.*body\".*\:.*\"(.*)\"\}$/gi,'$1')
-                    }
-                }
-                arr.body.push(j_body);
-            }
-            //console.log('j_body = ' + j_body);
-
-            if(j_color==''){
-                arr.connectColor.push('#FAC11B');
-            }else{
-                arr.connectColor.push(j_color);
-            }
-
-            //----------------------++++++
-            var info = '';
-            if(info_title==''){
-            }else{
-                info += `"title": `+ info_title;
-            }
-
-            if(info_description==''){
-            }else{
-                info += `"description":`  + info_description;
-            }
-
-            if(info_url==''){
-            }else{
-                info += `,"imageUrl":` + info_url;
-            }
-
-            if(info!=''){
-                info = '{ ' + info + ' }';
-            }
-
-            if(typeof(connectInfoJSON)==="object"){
-                //2016.12.03+ 改成只准物件格式的自訂
-                console.log('你自己輸入了 connectInfo 的 JSON 詳細補充是嗎？好喔，那我就不幫你產了。');
-
-                if(connectInfoJSON.length>0){
-                  //表示是是陣列，有多項。
-                  for (var i = 0; i < connectInfoJSON.length; i++) {
-                    arr.connectInfo.push(connectInfoJSON[i]);
-                    //測試用：[{"title" : "Topping","description" : "Pepperoni"},{"title": "Location","description": "Empire State Building, 5th Ave, New York","imageUrl": "http://url_to_text"}]
-                  }
-                }else{
-                  arr.connectInfo.push(connectInfoJSON);
-                }
-                // var json_b=[{"title" : "Topping","description" : "Pepperoni"},{"title": "Location","description": "Empire State Building, 5th Ave, New York","imageUrl": "http://url_to_text"}];
-                //JSON.stringify(json_b[0])
-                return arr;
-            }else{
-                arr.connectInfo.push({ "title": info_title, "description": info_description,"imageUrl": info_url });
-                //arr.connectInfo.push({ "title": "標題", "description": "詳細說明","imageUrl": "http://相關連結 " });
-            }
-
-            //2016.12.10+
-            localStorage['welcome_conut'] = (localStorage['welcome_conut']==null) ? 0 : localStorage['welcome_conut'];
-
-            //+ 傳送者資訊
-            if(userinfo_show){
-              var user_info_string = '瀏覽器/系統版本 詳細資訊：\n' + navigator.userAgent + '\n' + 
-              '所在頁面標題：[' + document.title + '](' + location.href + ')\n' +
-              '網頁寬度 X 網頁長度：' + $(document).width() + ' X ' + $(document).height() + '\n' + 
-              '螢幕解析度（寬 X 高、色彩位元）：' + screen.width + ' X ' + screen.height + ' ' + (  ((screen.colorDepth>16) &&(screen.colorDepth<=32)) ? '全彩 32 位元'  : (  (screen.colorDepth==16) ? '高彩 16 位元' :  '16 位元以下'  ) ) + '\n' + 
-              '瀏覽器介面語言：' + navigator.language + '\n' + 
-              '可能會的語言：' + navigator.languages + '\n' + 
-              '是否開啟 cookie 功能：' + ((navigator.cookieEnabled)?'已開啟':'沒開啟') + '\n' + 
-              '是否開啟 JAVA：' + ((navigator.javaEnabled())?'已開啟':'沒開啟') + '\n' + 
-              '發送時間（對方時區）：' + new Date() + '\n' + 
-              '發送時間戳（對方時區）：' + new Date().getTime() + '（new Date().getTime() 得到的數字丟回 new Date() 就可以還原當時的時間）\n' +
-              '今日拜訪次數：' + localStorage['welcome_conut'];
-
-              arr.connectInfo.push({ "title": "發訊者環境資訊（navigator）", "description": user_info_string,"imageUrl": "" });
-            }
-              //3個有八種組合.......... 
-              //加上，如果還要滿足多種設定。
-              //讓我想想怎麼弄 -> 用累加字串的方式，三個條件通過才累加
-              //最後把累加的字串丟去 push
-
-              //最簡單的就是拆成兩部分，body 接收他寫的內容純內文幫他推誠 JSON格式(參數1)
-              //另一部份的補充請他自己寫 JSON (參數3)
-
-              //參數4 5 6 用來補填 單次的 沒 JSON 的寫法
-
-
-            //arr.connectInfo.push({ "title": "Topping", "description": "Pepperoni","imageUrl": "https://trello-attachments.s3.amazonaws.com/581eee4e23caa6927b65b507/5822613b88f57e8e2d8be411/b3aea0450d015e2d6fe0a0492b8a7c61/blog_q3_2016_stats_table_1.jpg" });
-            //arr.connectInfo.push({ "title": "Location", "description": "Empire State Building, 5th Ave, New York","imageUrl": "https://trello-attachments.s3.amazonaws.com/581eee4e23caa6927b65b507/5822613b88f57e8e2d8be411/b3aea0450d015e2d6fe0a0492b8a7c61/blog_q3_2016_stats_table_1.jpg" });
-
-            //console.log('arr.body is no = ' + (arr.body=='') );
-            //2016.12.03 在這裡攔截 body 空值
-
-            if((arr.body=='')||(typeof(arr.body)===null)||(typeof(arr.body)===undefined)){
-                console.log('唉喲！少年啊，你為什麼最到這裡還是 body 空空啊！不能過啦你！');
-                return false;
-            }
-            console.log(JSON.stringify(arr));
-            return JSON.stringify(arr);
-        }
-
+        //專門 JANDI 傳訊
         // 2016.11.19+ 從 LINE BOT 得到啟發尋找關鍵字 setRequestHeader + jQ 得到 http://stackoverflow.com/questions/14010851/set-request-header-jquery-ajax
         // type 後面 data 前面 + beforeSend
         // 2016.11.24 驗證 JANDI Error 400，驗證 LINE 有擋，所以結論還是要靠 Zapier Webhooks
@@ -1989,6 +1844,136 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
           //? http://salesforce.stackexchange.com/questions/104026/rest-api-post-method-with-jquery
           //OK
         function JANDI_webhooks(send_json_data='',J_color='',J_title='',J_de,J_url='',userinfo_show=1,JANID_webhooks_url="https://wh.jandi.com/connect-api/webhook/11691684/3b6e6071e481e436605261583eff0177"){
+            //JANDI 專門格式化
+            function JANDI_json_format(j_body='',j_color='#FAC11B',connectInfoJSON,info_title='',info_description='',info_url='',userinfo_show=1){
+                var arr = {
+                  body: [],
+                  connectColor:[],
+                  connectInfo:[]
+                };
+
+                if(j_body==''){
+                    console.log('你沒輸入主要內容 body 為空');
+                    return false;
+                    //arr.body.push('你沒輸入');
+                }else{
+                    if(/^\{.*\}$/gi.test(j_body)||isJson(j_body)){
+                        //console.log(j_body);
+                        console.log('這不用格式化了好嗎 -> 這是手寫 JSON 或 JSON 物件，但你重複在 body 內又塞一個幹嘛...\n只好幫你轉換了，感謝我吧！');
+                        //是物件的話
+                        if(isJson(j_body)){
+                          if((j_body.body!='')||(typeof(j_body.body)!=null)||(typeof(j_body.body)!=undefined)){
+                            j_body = j_body.body;
+                            console.log(j_body);
+                            console.log(typeof(j_body));
+                          }else{
+                            //if(j_body.body==null){
+                              console.log('少年！你錯寫成物件就算了，還沒寫 body 不能通過啦！');
+                              return false;
+                            //}
+                          }
+                        }
+                        //是手寫的 Json 字串的話
+                        if(/^\{.*\}$/gi.test(j_body)){
+                          j_body = j_body.replace(/^\{.*body\".*\:.*\"(.*)\"\}$/gi,'$1')
+                        }
+                    }
+                    arr.body.push(j_body);
+                }
+                //console.log('j_body = ' + j_body);
+
+                if(j_color==''){
+                    arr.connectColor.push('#FAC11B');
+                }else{
+                    arr.connectColor.push(j_color);
+                }
+
+                //----------------------++++++
+                var info = '';
+                if(info_title==''){
+                }else{
+                    info += `"title": `+ info_title;
+                }
+
+                if(info_description==''){
+                }else{
+                    info += `"description":`  + info_description;
+                }
+
+                if(info_url==''){
+                }else{
+                    info += `,"imageUrl":` + info_url;
+                }
+
+                if(info!=''){
+                    info = '{ ' + info + ' }';
+                }
+
+                if(typeof(connectInfoJSON)==="object"){
+                    //2016.12.03+ 改成只准物件格式的自訂
+                    console.log('你自己輸入了 connectInfo 的 JSON 詳細補充是嗎？好喔，那我就不幫你產了。');
+
+                    if(connectInfoJSON.length>0){
+                      //表示是是陣列，有多項。
+                      for (var i = 0; i < connectInfoJSON.length; i++) {
+                        arr.connectInfo.push(connectInfoJSON[i]);
+                        //測試用：[{"title" : "Topping","description" : "Pepperoni"},{"title": "Location","description": "Empire State Building, 5th Ave, New York","imageUrl": "http://url_to_text"}]
+                      }
+                    }else{
+                      arr.connectInfo.push(connectInfoJSON);
+                    }
+                    // var json_b=[{"title" : "Topping","description" : "Pepperoni"},{"title": "Location","description": "Empire State Building, 5th Ave, New York","imageUrl": "http://url_to_text"}];
+                    //JSON.stringify(json_b[0])
+                    return arr;
+                }else{
+                    arr.connectInfo.push({ "title": info_title, "description": info_description,"imageUrl": info_url });
+                    //arr.connectInfo.push({ "title": "標題", "description": "詳細說明","imageUrl": "http://相關連結 " });
+                }
+
+                //2016.12.10+
+                localStorage['welcome_conut'] = (localStorage['welcome_conut']==null) ? 0 : localStorage['welcome_conut'];
+
+                //+ 傳送者資訊
+                if(userinfo_show){
+                  var user_info_string = '瀏覽器/系統版本 詳細資訊：\n' + navigator.userAgent + '\n' + 
+                  '所在頁面標題：[' + document.title + '](' + location.href + ')\n' +
+                  '網頁寬度 X 網頁長度：' + $(document).width() + ' X ' + $(document).height() + '\n' + 
+                  '螢幕解析度（寬 X 高、色彩位元）：' + screen.width + ' X ' + screen.height + ' ' + (  ((screen.colorDepth>16) &&(screen.colorDepth<=32)) ? '全彩 32 位元'  : (  (screen.colorDepth==16) ? '高彩 16 位元' :  '16 位元以下'  ) ) + '\n' + 
+                  '瀏覽器介面語言：' + navigator.language + '\n' + 
+                  '可能會的語言：' + navigator.languages + '\n' + 
+                  '是否開啟 cookie 功能：' + ((navigator.cookieEnabled)?'已開啟':'沒開啟') + '\n' + 
+                  '是否開啟 JAVA：' + ((navigator.javaEnabled())?'已開啟':'沒開啟') + '\n' + 
+                  '發送時間（對方時區）：' + new Date() + '\n' + 
+                  '發送時間戳（對方時區）：' + new Date().getTime() + '（new Date().getTime() 得到的數字丟回 new Date() 就可以還原當時的時間）\n' +
+                  '今日拜訪次數：' + localStorage['welcome_conut'];
+
+                  arr.connectInfo.push({ "title": "發訊者環境資訊（navigator）", "description": user_info_string,"imageUrl": "" });
+                }
+                  //3個有八種組合.......... 
+                  //加上，如果還要滿足多種設定。
+                  //讓我想想怎麼弄 -> 用累加字串的方式，三個條件通過才累加
+                  //最後把累加的字串丟去 push
+
+                  //最簡單的就是拆成兩部分，body 接收他寫的內容純內文幫他推誠 JSON格式(參數1)
+                  //另一部份的補充請他自己寫 JSON (參數3)
+
+                  //參數4 5 6 用來補填 單次的 沒 JSON 的寫法
+
+
+                //arr.connectInfo.push({ "title": "Topping", "description": "Pepperoni","imageUrl": "https://trello-attachments.s3.amazonaws.com/581eee4e23caa6927b65b507/5822613b88f57e8e2d8be411/b3aea0450d015e2d6fe0a0492b8a7c61/blog_q3_2016_stats_table_1.jpg" });
+                //arr.connectInfo.push({ "title": "Location", "description": "Empire State Building, 5th Ave, New York","imageUrl": "https://trello-attachments.s3.amazonaws.com/581eee4e23caa6927b65b507/5822613b88f57e8e2d8be411/b3aea0450d015e2d6fe0a0492b8a7c61/blog_q3_2016_stats_table_1.jpg" });
+
+                //console.log('arr.body is no = ' + (arr.body=='') );
+                //2016.12.03 在這裡攔截 body 空值
+
+                if((arr.body=='')||(typeof(arr.body)===null)||(typeof(arr.body)===undefined)){
+                    console.log('唉喲！少年啊，你為什麼最到這裡還是 body 空空啊！不能過啦你！');
+                    return false;
+                }
+                console.log(JSON.stringify(arr));
+                return JSON.stringify(arr);
+            }
+
             //( !(/^\{.*\}$/gi.test(send_json_data)) ) ==> 沒 {} 的字串
             //NAND 可以 (XXXX 會有錯，造成純文字的掛掉)
             //假 NAND //if ((send_json_data=='')||(/JANDI_json_format/gi.test(send_json_data))|| (!  ( !(/^\{.*\}$/gi.test(send_json_data)) )  &&  (typeof(send_json_data)==="object")     )       ){
@@ -2082,6 +2067,7 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
                     document.getElementsByTagName('head')[0].appendChild(s);
         }
         */
+        //這有點需要再優化，不然未來要替換很麻煩。
         //2016.11.25+ LINE 自由通(接新的Zap) + A
         function report_webhooks(c,b,a,d){c=void 0===c?"LINE":c;b=void 0===b?"":b;a=void 0===a?0:a;d=void 0===d?"":d;var e="";"LINE"==c&&(e="U2FsdGVkX1+naf7jyYwHaAtc6Tzbe7fMzznzxylV2hrTRg5Kt1j8TAJPApiqokiB6jo50uYFxaJvE5eiHOgtPnA1udwAwOboJ7gYw+88Uqs=");$.ajax({url:GibberishAES.dec(e,"landerso.anime-voice.com"),data:JSON.stringify({website_url:location.href,other_msg:b,post_user:d}),async:!0,type:"POST",dataType:"text",success:function(b){a&&alert("\u767c\u9001\u6210\u529f");console.log("\u901a\u5831\u6210\u529f\uff01");
 console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.href);console.log("\u8a73\u7d30\u8cc7\u8a0a\u5099\u67e5\uff1a\n"+b);console.log("\u901a\u5831\u55ae\u4f4d\uff1a"+c)},error:function(b,c,d){a&&alert("Error"+b.status);console.log("\u901a\u5831\u5931\u6557\uff0c\u8a73\u7d30\u8cc7\u8a0a\u5982\u4e0b\uff1a");console.log(b.status);console.log(d)}})}
@@ -2091,12 +2077,6 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
         //非同步載入姐姐 **************************************************************************
         plus_js("x.js","plusjs_"+Math.floor(1E9*Math.random()));
         plus_js("md5.min.js","plusjs_"+Math.floor(1E9*Math.random())); //https://blueimp.github.io/JavaScript-MD5/
-
-        function css_add_inline( css_code ) {
-          var div = document.createElement( "div" );
-          div.innerHTML = "<p>x</p><style>" + css_code + "</style>";
-          document.body.appendChild(div.childNodes[1]);
-        }
 
         //2016.11.29+ catch error
         function x_de(word,namae){
@@ -2543,21 +2523,31 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
         //2016.12.01+ md 白名跟嘿共用模式（過程跟姐姐反過來，姊姊過程給門票，到達地點對方Ｍ驗。這邊反過來，這邊驗，對方給自動發門票）
         function check_md_ok(listname,word="",namae=""){
             if (((localStorage[listname] === undefined)||(localStorage[listname] == null)||(localStorage[listname] == '')||(localStorage[listname] != x_de(word,namae)))) {
-                
-                //2016.12.05+ 記錄錯誤頁
-                localStorage['error_md'] = document.location.href.replace(/.*\#\!(.*.md)/gi,'$1');
-                localStorage['error_url'] = document.location.href;
+                //排除首頁 2016.12.18+
+                if(/.*\#\!index.md$/gi.test(document.location.href)){
 
-                  // if(navigator.userAgent=='Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36'){
-                  //     alert('你現在已經觸發錯誤通報\n但現在是封測觸發點，所以跳過傳訊。');
-                  // }else{
-                      //2016.12.05+ JANDI
-                      JANDI_webhooks('【來自各方 MDwiki 系統的 error403.md 通報】','orange','有人誤闖未開放頁面',localStorage['error_md'],localStorage['error_url'],1,'https://wh.jandi.com/connect-api/webhook/11691684/3b6e6071e481e436605261583eff0177');
-                  // }
+                    console.info('首頁發生 Error403 應該是太敏感');
+                    //一般首頁不用弄到 403
+                }else{                
+                    //2016.12.05+ 記錄錯誤頁
+                    localStorage['error_md'] = document.location.href.replace(/.*\#\!(.*.md)/gi,'$1');
+                    localStorage['error_url'] = document.location.href;
 
-                //document.location = document.location.href.replace(/\#\!(.*.md)/gi,'#!error403.md'); //config.json 會進來 因為不是 .md 結尾
-                document.location = document.location.href.replace(/\#\!(.*)/gi,'#!error403.md');
-                //history.back(); 
+                    // if(navigator.userAgent=='Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36'){
+                    //     alert('你現在已經觸發錯誤通報\n但現在是封測觸發點，所以跳過傳訊。');
+                    // }else{
+                    //2016.12.05+ JANDI
+                    JANDI_webhooks('【來自各方 MDwiki 系統的 error403.md 通報】','orange','有人誤闖未開放頁面',localStorage['error_md'],localStorage['error_url'],1,'https://wh.jandi.com/connect-api/webhook/11691684/3b6e6071e481e436605261583eff0177');
+                    // }
+                    //2016.12.18+ 等訊息傳完再跳頁
+                    function turn_on_error403(){
+                          //document.location = document.location.href.replace(/\#\!(.*.md)/gi,'#!error403.md'); //config.json 會進來 因為不是 .md 結尾
+                          document.location = document.location.href.replace(/\#\!(.*)/gi,'#!error403.md');
+                          //history.back(); 
+                                          
+                    }
+                    window.setTimeout(turn_on_error403,1300);
+                }
             }
             localStorage.removeItem(listname);
         }
@@ -2572,6 +2562,10 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
          //2016.12.07+ 修正奇怪的畫面：當網頁卷軸位子不在 TOP 的時候，如果重新整理網頁。會看到他超長。
          //2016.12.08+ debug
          function debug_width(){
+            if(document.getElementById('md-page-menu')==null){            //2016.12.18+
+                //console.log('沒有欄不用 debug 位子');
+                return false;
+            }
             debug_width_timer++;
             try {
                         if((parseInt(document.getElementById('md-page-menu').style.width.replace(/(\d+).*/gi,'$1'))>parseInt($(document).width())*0.25) && (!($(document).width()<975)) ) {
@@ -2626,8 +2620,8 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
                      clearInterval(debug_width_num);
                    }
                 }
+              }
             }
-          }
         }
         var debug_width_num = window.setInterval(debug_width(),500);
         var debug_width_timer = 0;
@@ -2706,53 +2700,106 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
         }
         //menu_close();
 
+        //未完成區域-------自製代碼抽換
+        function wiki_link(target_tag){
+            if(document.getElementsByTagName(target_tag)[0] !== undefined){
+                for (var i = 0; i < document.getElementsByTagName(target_tag).length; i++) {
+                    if(/\[\[(.*)\]\]/gim.test(document.getElementsByTagName(target_tag)[i].innerHTML)){
+                        if(document.getElementsByTagName(target_tag)[i].innerHTML.replace(/\[\[(.*)\]\]|(\<code.*\[\[.*\]\].*\<\/code\>)/gim,'$1')==''){
+                            //\[\[(.*)\]\]|\<code.*\[\[(.*)\]\].*\<\/code\>            $1=='' -> code 內
+                            document.getElementsByTagName(target_tag)[i].innerHTML = document.getElementsByTagName(target_tag)[i].innerHTML.replace(/\[\[(.*)\]\]/gim,'<a href=\"#!$1\">$1<\/a>');
+                            console.log('wiki aru');
+                        }
+                    }else{
+                        console.log('1 if -else');
+                    }
+                }
+            }else{
+                console.log('no momno');
+            }
+        }
+
+        function wiki_link_id(target_id = 'md\-content'){
+            if(document.getElementById(target_id) !== undefined){
+                //for (var i = 0; i < document.getElementsByTagName(target_tag).length; i++) {
+                    if(/\[\[(.*)\]\]/gim.test(document.getElementById(target_id).innerHTML)){
+                        if(document.getElementById(target_id).innerHTML.replace(/\[\[(.*)\]\]|(\<code.*\[\[.*\]\].*\<\/code\>)/gim,'$1')==''){
+                            //\[\[(.*)\]\]|\<code.*\[\[(.*)\]\].*\<\/code\>            $1=='' -> code 內
+                            document.getElementById(target_id).innerHTML = document.getElementById(target_id).innerHTML.replace(/\[\[(.*)\]\]/gim,'<a href=\"#!$1\">$1<\/a>');
+                            console.log('wiki aru');
+                        }
+                    }else{
+                        console.log('1 if -else');
+                    }
+                //}
+            }else{
+                console.log('no momno');
+            }
+        }
+        //未完成區域-------結束
+
     </script>
 <!-- 2016.10.20 增加判斷瀏覽者裝置 function 結束 -->
-    
+
+    <!-- 華康過期撤下 -->
         <!-- 2016.10.28+ font test by https://dfo.dynacw.com.tw/Javascript_Module/JSFontPreview.aspx?t=JS_Gen --> <!-- KEY point:jsgendfo() -->
         <!-- <script>FontJSON={User:"5305" ,DomainID:"freeGXSDOLNEOKGXS", Font:["DFT_HZP5"]}</script>  -->
-    <!-- 華康過期撤下 -->
-    <!-- 
-    <script>FontJSON={User:"5305" ,DomainID:"freeGXSDOLNEOKGXS", Font:["DFT_TF3","DFT_HZP3","DFT_HZP5"]}</script>
-    <script async src='https://dfo.dynacw.com.tw/DynaJSFont/DynaFont.js'></script>
-     -->
+      <!-- 
+      <script>FontJSON={User:"5305" ,DomainID:"freeGXSDOLNEOKGXS", Font:["DFT_TF3","DFT_HZP3","DFT_HZP5"]}</script>
+      <script async src='https://dfo.dynacw.com.tw/DynaJSFont/DynaFont.js'></script>
+       -->
 
     <!-- JustFont 還沒買，快買了 -->
     <script async src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-45679.js"></script>
-
     <script type="text/javascript">
-    // https://www.justfont.com/cheats
-    // _jf.flush();
+      // https://www.justfont.com/cheats
+      // _jf.flush();
 
-    var _jf = _jf || [];
+      var _jf = _jf || [];
 
-    _jf.push(['_eventPreload',function(){
+      _jf.push(['_eventPreload',function(){
 
-       //載入前觸發事件
-       console.log('JustFont 載入前');
+         //載入前觸發事件
+         console.log('JustFont 載入前');
 
-    }]);
+      }]);
 
-    _jf.push(['_eventActived',function(){
+      _jf.push(['_eventActived',function(){
 
-       //成功觸發事件
-       console.log('JustFont 載入成功');
+         //成功觸發事件
+         console.log('JustFont 載入成功');
 
-    }]);
+      }]);
 
-    _jf.push(['_eventInactived',function(){
+      _jf.push(['_eventInactived',function(){
 
-       //失敗觸發事件
-       console.log('JustFont 載入失敗');
+         //失敗觸發事件
+         console.log('JustFont 載入失敗');
 
-    }])
-
+      }])
     </script>
-    <!-- 2016.12.11+ https://developers.line.me/line-it/line-it-button-for-websites https://lineit.line.me/share/ui? LineShareButton Computer  LineIt.loadButton(); 可是很爛破爛-->
-    <!-- <script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async"　defer="defer"></script> -->
 
-    <!-- 文鼎 -->
-    <!-- <script type='text/javascript' src='//font.arphic.com/FontSubsetOutput/1470551355753/EEC76680DA382707F92AE6B91449CB67/1470551355753.JS?5178207705'></script> -->
+    <!-- Web font_開始 -->
+        <!-- 文鼎 -->
+        <!-- <script type='text/javascript' src='//font.arphic.com/FontSubsetOutput/1470551355753/EEC76680DA382707F92AE6B91449CB67/1470551355753.JS?5178207705'></script> -->
+        <!-- 文鼎 -->
+        <!-- http://ifontcloud.com/index/fontKnowledge_9.jsp -->
+        <!--     <script type='text/javascript' src='//font.arphic.com/FontSubsetOutput/1470551355753/EEC76680DA382707F92AE6B91449CB67/1470551355753.JS?2011523677'></script>
+        <style type="text/css">
+            .arwf-loading body { /*Web Font正在載入中，不顯示文字*/
+                  opacity: 0;
+                  visibility: hidden;
+            }
+            .arwf-active body { /*Web Font處理成功，直接顯示文字*/
+                  opacity: 1;
+                  visibility: visible;
+            }
+            .arwf-inactive body {/*如果Web Font處理失敗，直接顯示文字*/
+                  opacity: 1;
+                  visibility: visible;
+            }
+        </style> -->
+    <!-- Web font_結束 -->
 
     <!-- 2016.11.16+ 即時通線上客服 -->
     <!-- Smartsupp Live Chat script https://dashboard.smartsupp.com -->
@@ -2775,17 +2822,20 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
     </script>
 
     <!--Start of Zendesk Chat Script 知名牌-->
-<!--     <script type="text/javascript">
-    //https://dashboard.zopim.com/?first_login#home
-      window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-      d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-      _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-      $.src="https://v2.zopim.com/?4N2hjeOYagZS4xf0gOM94IzSBQHiZmm9";z.t=+new Date;$.
-      type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
-    </script> -->
+        <!-- 
+              <script type="text/javascript">
+              //https://dashboard.zopim.com/?first_login#home
+                window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+                d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+                _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+                $.src="https://v2.zopim.com/?4N2hjeOYagZS4xf0gOM94IzSBQHiZmm9";z.t=+new Date;$.
+                type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+              </script>
+         -->    
     <!--End of Zendesk Chat Script-->
 
-     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.2.0/trianglify.min.js"></script> -->
+    <!-- 蜂窩背景測試失敗 -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.2.0/trianglify.min.js"></script> -->
 
 </head>
 <body onload="javascript:parseLink();" onclick="javascript:parseLink();">
