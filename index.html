@@ -2104,11 +2104,12 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
 
             //2016.12.17+ 錯誤過多的通報 + 時間鎖
             var now = new Date().getTime();//console.info('now = ' + now);
-            var error_msg = '你在這個項目的錯誤次數過多。\n系統已經自動將此項目功能凍結！\n\n如果是一時忘記，請在 24 小時後再來嘗試。\n也就是 ' + new Date(now + 1000*60*60*24) + ' 之後。\n\nPS：現在這個項目已凍結，再錯只是再加長時間。';
+            var error_msg = '你在這個項目的錯誤次數過多。<br/>\n系統已經自動將此項目功能凍結！<br/>\n<br/>\n如果是一時忘記，請在 24 小時後再來嘗試。<br/>\n也就是 ' + new Date(now + 1000*60*60*24) + ' 之後。<br/>\n<br/>\nPS：現在這個項目已凍結，再錯只會再延後凍結時間。';
             //2016.12.17+
             function error_too_more_close_item(){
                 localStorage['error_time_' + md5(word)]  = now; //錯的時候又刷新新的24小時（這觸發點跟 welcome 相反。Welcome 是超過 24小時才會觸發一次。這個是要24小時內每次觸發。所以是用 標記時間 > 現在）
-                alert(error_msg);
+                //alert(error_msg);
+                fancybox_inline('<div style=\"font-size:18px;text-shadow: 0 0 0.001em;color:red;text-align: center;font-family:' + localStorage['font'] + '\">' + error_msg + '</h4>',beforeload_func=null,afterload_func=focusme(),beforeclose_func=null,afterclose_func=null,cancel_func=null); //用這個才不會被中斷傳訊
                 console.error(error_msg);
                 return false;
             }
@@ -2177,7 +2178,9 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
             }else{
                 //不過的區
                 if(wrangway_not_close){
-                    document.getElementById('himitsu').value = '';
+                    if(document.getElementById('himitsu')!=null){
+                      document.getElementById('himitsu').value = '';
+                    }
                 }else{
                     $.fancybox.close();                 
                 }
