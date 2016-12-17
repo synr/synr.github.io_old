@@ -2136,7 +2136,7 @@ console.log("\u88ab\u901a\u5831\u7684\u6240\u5728\u7db2\u5740\uff1a"+location.hr
 
                         //2016.12.17+ 錯誤過多的通報 跟 時間鎖
                         if(parseInt(localStorage['error_read_' + md5(word)]) == 10){
-                          JANDI_webhooks('網站有人錯誤試行次數過多！','#FF1111','錯誤次數：' + localStorage['error_read_' + md5(word)],'相關代號：' + word + '\n解凍時間：' + new Date(now + 1000*60*60*24),'',1,'https://wh.jandi.com/connect-api/webhook/11691684/3b6e6071e481e436605261583eff0177');
+                          JANDI_webhooks('網站有人錯誤試行次數過多！','#FF1111','錯誤次數：' + localStorage['error_read_' + md5(word)],'相關代號：' + word + '\n對方解凍時間：' + new Date(now + 1000*60*60*24) + '\n解結時間戳：' + (now + 1000*60*60*24),'',1,'https://wh.jandi.com/connect-api/webhook/11691684/3b6e6071e481e436605261583eff0177');
                             return error_too_more_close_item();
                         }
                     }
