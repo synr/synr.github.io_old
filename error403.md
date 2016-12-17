@@ -32,7 +32,12 @@
   2. 網站右下角，有個類線上即時通訊客服系統。
   這邊可以更直接連絡到站長。
   站長有空的時候你可能看到即時回應。
-  3. ~~透過其他你知道的管道找到我，逼問我~~。 
+  3. 透過 @LINE 留言給我
+    - 手動搜尋 ID：``@uwk0684z`` 或 [點此](https://line.me/R/ti/p/@uwk0684z)
+    - 用手機掃描碼：
+    [![.](http://landerso.at-ninja.jp/uwk0684z.JPG "test")](http://landerso.at-ninja.jp/uwk0684z.JPG)
+    [![.](https://trello-attachments.s3.amazonaws.com/5783d8e69b3fce2d52f94f9e/1140x1189/c3e80edb92e2c52abb16a48634e06048/cc0e4f143c9176c220afbd5f65610567.JPG "點我放大")](https://trello-attachments.s3.amazonaws.com/5783d8e69b3fce2d52f94f9e/1140x1189/c3e80edb92e2c52abb16a48634e06048/cc0e4f143c9176c220afbd5f65610567.JPG)
+  4. ~~透過其他你知道的管道找到我，逼問我~~。 
 
 
 
